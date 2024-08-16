@@ -1,19 +1,14 @@
 "use client";
-import React, { useState } from "react";
-
+import React from "react";
 import { showList } from "@/lib/global";
-import Image from "next/image";
 import MovieCard from "@/app/(components)/Cards/page";
-
-// interface Shows {
-//   name: string;
-//   src: string;
-//   category: string;
-//   synopsis: string;
-// }
+import { Category } from "@/lib/types";
 
 const Categories = () => {
-  const filterShowsByCategory = (shows, category) => {
+  const filterShowsByCategory = (
+    shows: Category[],
+    category: string
+  ): Category[] => {
     return shows.filter((show) => show.category === category);
   };
 
@@ -27,19 +22,19 @@ const Categories = () => {
       <h1 className="font-bold text-[35px]">Categories</h1>
       <div className="">
         <h3>Rom Com</h3>
-        <MovieCard Category={Romcom} />
+        <MovieCard categories={Romcom} />
       </div>
       <div className="">
         <h3>Drama</h3>
-        <MovieCard Category={Drama} />
+        <MovieCard categories={Drama} />
       </div>
       <div className="">
         <h3>Action</h3>
-        <MovieCard Category={Action} />
+        <MovieCard categories={Action} />
       </div>
       <div className="">
         <h3>Comedy</h3>
-        <MovieCard Category={Comedy} />
+        <MovieCard categories={Comedy} />
       </div>
     </div>
   );
