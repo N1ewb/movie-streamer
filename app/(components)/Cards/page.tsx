@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { CardProps } from "@/lib/types";
+import { Category } from "@/lib/types";
 
-const Cards = ({ categories }: CardProps) => {
+const Cards = ({ categories }: { categories: Category[] }) => {
   return (
     <div className="flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
       {categories && categories.length > 0 ? (

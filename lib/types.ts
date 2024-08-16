@@ -6,6 +6,3 @@ export interface Category {
     synopsis?: string; 
   }
 
-export interface CardProps {
-    categories: Category[];
-  }
