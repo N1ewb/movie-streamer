@@ -29,6 +29,7 @@ const Footer = () => {
             <a>Register</a>
             <a> </a>
             <a> </a>
+            <a></a>
           </div>
         </div>
       </div>
