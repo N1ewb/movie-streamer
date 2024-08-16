@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { CardProps } from "@/lib/types";
 
-const Cards: React.FC<CardProps> = ({ categories }) => {
+const Cards = ({ categories }: CardProps) => {
   return (
     <div className="flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
       {categories && categories.length > 0 ? (
