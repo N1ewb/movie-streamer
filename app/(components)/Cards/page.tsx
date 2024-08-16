@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Category } from "@/lib/types";
 
-const Cards: React.FC<{ categories: Category[] }> = ({ categories }) => {
+export const Cards = ({ categories }: { categories: Category[] }) => {
   return (
     <div className="flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
       {categories && categories.length > 0 ? (
@@ -18,5 +18,3 @@ const Cards: React.FC<{ categories: Category[] }> = ({ categories }) => {
     </div>
   );
 };
-
-export default Cards;
