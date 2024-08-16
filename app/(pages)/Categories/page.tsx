@@ -4,18 +4,6 @@ import Cards from "@/app/(components)/Cards/page";
 import { Category } from "@/lib/types";
 
 const Categories: React.FC = () => {
-  const filterShowsByCategory = (
-    shows: Category[],
-    category: string
-  ): Category[] => {
-    return shows.filter((show) => show.category === category);
-  };
-
-  const Romcom = filterShowsByCategory(showList, "RomCom");
-  const Drama = filterShowsByCategory(showList, "Drama");
-  const Action = filterShowsByCategory(showList, "Action");
-  const Comedy = filterShowsByCategory(showList, "Comedy");
-
   return (
     <div className="categories-container relative top-[210px] text-white w-full p-10 bg-black">
       <h1 className="font-bold text-[35px]">Categories</h1>
