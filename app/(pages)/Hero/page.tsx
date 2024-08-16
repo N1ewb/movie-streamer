@@ -7,6 +7,8 @@ import Image from "next/image";
 interface Movie {
   name: string;
   src: string;
+  synopsis: string;
+  altSrc: string;
 }
 
 const Hero = () => {
