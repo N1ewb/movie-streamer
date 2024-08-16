@@ -9,19 +9,19 @@ const Categories: React.FC = () => {
       <h1 className="font-bold text-[35px]">Categories</h1>
       <div>
         <h3>Rom Com</h3>
-        <Cards categories={Romcom} />
+        <Cards />
       </div>
       <div>
         <h3>Drama</h3>
-        <Cards categories={Drama} />
+        <Cards />
       </div>
       <div>
         <h3>Action</h3>
-        <Cards categories={Action} />
+        <Cards />
       </div>
       <div>
         <h3>Comedy</h3>
-        <Cards categories={Comedy} />
+        <Cards />
       </div>
     </div>
   );
