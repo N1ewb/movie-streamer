@@ -67,6 +67,7 @@ const Hero = () => {
           Right
         </button>
       </div>
+      <div className="div"></div>
     </div>
   );
 };
