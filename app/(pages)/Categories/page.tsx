@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { showList } from "@/lib/global";
-import MovieCard from "@/app/(components)/Cards/page";
+import Cards from "@/app/(components)/Cards/page";
 import { Category } from "@/lib/types";
 
 const Categories = () => {
@@ -22,19 +22,19 @@ const Categories = () => {
       <h1 className="font-bold text-[35px]">Categories</h1>
       <div className="">
         <h3>Rom Com</h3>
-        <MovieCard categories={Romcom} />
+        <Cards categories={Romcom} />
       </div>
       <div className="">
         <h3>Drama</h3>
-        <MovieCard categories={Drama} />
+        <Cards categories={Drama} />
       </div>
       <div className="">
         <h3>Action</h3>
-        <MovieCard categories={Action} />
+        <Cards categories={Action} />
       </div>
       <div className="">
         <h3>Comedy</h3>
-        <MovieCard categories={Comedy} />
+        <Cards categories={Comedy} />
       </div>
     </div>
   );

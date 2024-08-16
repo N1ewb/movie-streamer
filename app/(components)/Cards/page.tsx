@@ -6,7 +6,7 @@ interface MovieCardProps {
   categories: Category[];
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ categories }) => {
+const Cards: React.FC<MovieCardProps> = ({ categories }) => {
   return (
     <div className="flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
       {categories && categories.length > 0 ? (
@@ -23,4 +23,4 @@ const MovieCard: React.FC<MovieCardProps> = ({ categories }) => {
   );
 };
 
-export default MovieCard;
+export default Cards;
