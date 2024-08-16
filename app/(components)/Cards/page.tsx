@@ -1,6 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { CardProps } from "@/lib/types";
+import { Category } from "@/lib/types";
+
+interface CardProps {
+  categories: Category[];
+}
 
 const Cards = ({ categories }: CardProps) => {
   return (
