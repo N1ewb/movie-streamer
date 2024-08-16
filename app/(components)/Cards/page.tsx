@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Category } from "@/lib/types";
 
-const Cards = ({ categories }: { categories: Category[] }) => {
+const Cards: React.FC<{ categories: Category[] }> = ({ categories }) => {
   return (
     <div className="flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
       {categories && categories.length > 0 ? (
