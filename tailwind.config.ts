@@ -54,6 +54,7 @@ const config: Config = {
         "1xl": "1360px",
         "4xl": "1920px",
         "mobile-max": { max: "640px" },
+        "19in-max" : {max: "1366px"}
       },
     },
   },

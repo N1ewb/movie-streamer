@@ -23,7 +23,7 @@ const Categories = () => {
   const Comedy = filterShowsByCategory(showList, "Comedy");
 
   return (
-    <div className="text-white w-full p-10">
+    <div className="categories-container relative top-[210px] text-white w-full p-10 bg-black">
       <h1 className="font-bold text-[35px]">Categories</h1>
       <div className="">
         <h3>Rom Com</h3>

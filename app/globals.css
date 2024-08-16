@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.scrollbar-hide {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .small-screen-image {
+    display: none;
+  }
+  @media screen and (max-width: 390px) {
+    .logo-container{
+        width: 50%;
+    }
+    .nav-links {
+        display: none;
+    }
+    .large-screen-image {
+        display: none;
+      }
+      .small-screen-image {
+        display: block;
+      }
+    .anime-info-container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .anime-info {
+        width: 100%;
+        top: 150px;
+    }
+    .anime-info h1 {
+        font-size: 25px;
+        width: 300px;
+    }
+    .anime-info p{
+        display: none;
+    }
+    .anime-info button{
+        width: 300px;
+
+    }
+    .features-container  {
+        top: 650px;
+    }
+    .footer-content-container{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .navigation {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .account {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .contact {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}

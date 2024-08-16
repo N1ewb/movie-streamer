@@ -4,11 +4,11 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="flex flex-row justify-between align-middle p-5 bg-[#23252B] text-white">
-      <div className="w-[33%]">
+    <div className="flex flex-row w-full justify-between align-middle p-5 bg-[#23252B] text-white mb-8 z-50">
+      <div className="logo-container w-[33%]">
         <Image src="/Logo.png" alt="logo" height={160} width={160} />
       </div>
-      <div className="flex flex-row justify-between w-[33%] align-middle items-center">
+      <div className="nav-links flex flex-row justify-between w-[33%] align-middle items-center">
         <Link className="m-0 " href="#">
           Browse
         </Link>
