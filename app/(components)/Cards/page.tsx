@@ -19,10 +19,13 @@ const Cards = () => {
   return (
     <div className="flex flex-col ">
       <h1>Rom Com</h1>
-      <div className="romcom-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
+      <div className="romcom category-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
         {Romcom && Romcom.length > 0 ? (
           Romcom.map((show, index) => (
-            <div key={index} className="flex-shrink-0 w-[160px] text-center">
+            <div
+              key={index}
+              className="category-image flex-shrink-0 w-[160px] text-center"
+            >
               <Image src={show.src} alt={show.name} height={160} width={160} />
               <p>{show.name}</p>
             </div>
@@ -32,10 +35,13 @@ const Cards = () => {
         )}
       </div>
       <h1>Drama</h1>
-      <div className="drama-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
+      <div className="drama category-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
         {Drama && Drama.length > 0 ? (
           Drama.map((show, index) => (
-            <div key={index} className="flex-shrink-0 w-[160px] text-center">
+            <div
+              key={index}
+              className="category-image flex-shrink-0 w-[160px] text-center"
+            >
               <Image src={show.src} alt={show.name} height={160} width={160} />
               <p>{show.name}</p>
             </div>
@@ -45,10 +51,13 @@ const Cards = () => {
         )}
       </div>
       <h1>Action</h1>
-      <div className="action-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
+      <div className="action category-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
         {Action && Action.length > 0 ? (
           Action.map((show, index) => (
-            <div key={index} className="flex-shrink-0 w-[160px] text-center">
+            <div
+              key={index}
+              className="category-image flex-shrink-0 w-[160px] text-center"
+            >
               <Image src={show.src} alt={show.name} height={160} width={160} />
               <p>{show.name}</p>
             </div>
@@ -58,10 +67,13 @@ const Cards = () => {
         )}
       </div>
       <h1>Comedy</h1>
-      <div className="comedy-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
+      <div className="comedy category-container flex flex-row gap-5 p-10 max-w-full overflow-auto scrollbar-hide">
         {Comedy && Comedy.length > 0 ? (
           Comedy.map((show, index) => (
-            <div key={index} className="flex-shrink-0 w-[160px] text-center">
+            <div
+              key={index}
+              className="category-image flex-shrink-0 w-[160px] text-center"
+            >
               <Image src={show.src} alt={show.name} height={160} width={160} />
               <p>{show.name}</p>
             </div>

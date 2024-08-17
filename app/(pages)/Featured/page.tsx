@@ -10,12 +10,12 @@ const Features = () => {
         <h1 className="font-bold text-[35px]">Featured</h1>
         <p className="text-[#C7C7C7]">Shows for you</p>
       </header>
-      <div className="flex flex-row  gap-5  overflow-auto max-w-full scrollbar-hide">
+      <div className="featured-image-container flex flex-row  gap-5  overflow-auto max-w-full scrollbar-hide">
         {featuredList && featuredList.length !== 0 ? (
           featuredList.map((show, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-[200px] text-center mobile-max:min-w-[200px]"
+              className="featured-images flex-shrink-0 w-[200px] items-center text-center"
             >
               <Image src={show.src} alt={show.name} height={200} width={200} />
               <p className="">{show.name}</p>
