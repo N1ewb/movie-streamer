@@ -1,7 +1,11 @@
 import Image from "next/image";
 import React from "react";
 
-const MovieCard = ({ movie }) => {
+export interface MovieCardProps {
+  movie: any;
+}
+
+const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
     <div className="text-white w-[160px] text-center">
       <Image
