@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Category } from "@/lib/types";
-import { showList } from "@/lib/global";
+import { showList } from "@/lib/temp";
 
 const filterShowsByCategory = (
   shows: Category[],

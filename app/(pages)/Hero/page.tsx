@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { heroMovies } from "@/lib/global";
+import { heroMovies } from "@/lib/temp";
 import Image from "next/image";
 
 interface Movie {

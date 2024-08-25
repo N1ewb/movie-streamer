@@ -6,3 +6,5 @@ export interface Category {
     synopsis?: string; 
   }
 
+  
+

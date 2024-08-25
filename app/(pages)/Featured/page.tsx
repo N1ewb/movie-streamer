@@ -1,6 +1,6 @@
 import React from "react";
 
-import { featuredList } from "@/lib/global";
+import { featuredList } from "@/lib/temp";
 import Image from "next/image";
 
 const Features = () => {

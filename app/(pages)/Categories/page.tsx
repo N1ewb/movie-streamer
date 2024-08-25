@@ -1,5 +1,5 @@
 import React from "react";
-import { showList } from "@/lib/global";
+import { showList } from "@/lib/temp";
 import Cards from "@/app/(components)/Cards/page";
 import { Category } from "@/lib/types";
 
