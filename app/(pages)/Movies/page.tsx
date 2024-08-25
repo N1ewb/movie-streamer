@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import fetch from "node-fetch";
-import MovieCard from "@/app/(components)/MovieCard/page";
+import MovieCard from "@/app/(components)/MovieCard";
 
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
