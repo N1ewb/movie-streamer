@@ -1,44 +1,20 @@
 import fetch from 'node-fetch';
 
-type GuestSessionApiResponse = {
-    success: boolean;
-    guest_session_id: string;
-    expires_at: number;
-};
 
-export const CreateGuestSession = async (): Promise<GuestSessionApiResponse> => {
-    const authorization = process.env.AUTHORIZATION;
+export const URLForMovieList =
+"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
 
-    if (!authorization) {
-        throw new Error('Authorization key is missing');
-    }
+export const URLForMovieGenre = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
 
-    const url = 'https://api.themoviedb.org/3/authentication/guest_session/new';
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: authorization,
-        },
-    };
+export const URLForGenreList = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 
-    try {
-        const response = await fetch(url, options);
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const json: GuestSessionApiResponse = await response.json();
-        console.log(json);
-        return json;
-    } catch (err: unknown) {
-        if (err instanceof Error) {
-            console.error('Error:', err.message);
-        } else {
-            console.error('Unknown error:', err);
-        }
-        throw err; 
-    }
+export const Getoptions = {
+method: "GET",
+headers: {
+    accept: "application/json",
+    Authorization:
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDk1ODFlNWQ1ZGZjNTc5NjBlYzhkMWY5YTVmNzQ0MyIsIm5iZiI6MTcyNDU1NzcwMi44NzcwNzQsInN1YiI6IjY2YzgyZmI1OGZlZDdjY2Q3NGMzY2MxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ied4arbplyzEc_U18Y4APreGJlgy6jyheo0WEY1IWBg",
+},
 };
 

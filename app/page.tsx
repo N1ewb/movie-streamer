@@ -1,9 +1,11 @@
 // import Image from "next/image";
+import Footer from "./(components)/Footer";
+import Header from "./(components)/Header";
+import MovieGenre from "./(pages)/Categories/page";
 import Hero from "./(pages)/Hero/page";
 // import Features from "./(pages)/Featured/page";
 // import Categories from "./(pages)/Categories/page";
-import Header from "./(components)/Header/page";
-import Footer from "./(components)/Footer/page";
+
 import MovieList from "./(pages)/Movies/page";
 
 export default function Home() {
@@ -12,7 +14,7 @@ export default function Home() {
       <Header />
       <Hero />
       <MovieList />
-
+      <MovieGenre />
       <Footer />
     </main>
   );
