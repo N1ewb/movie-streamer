@@ -3,6 +3,23 @@ import React, { useEffect, useState } from "react";
 import fetch from "node-fetch";
 import MovieCard from "@/app/(components)/MovieCard";
 
+interface Movie {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
 
@@ -29,7 +46,7 @@ const MovieList = () => {
       <h3>Movie List</h3>
       <div className="movie-list-container flex flex-row flex-wrap w-full  gap-5">
         {movieList && movieList.length !== 0
-          ? movieList.map((movie) => (
+          ? movieList.map((movie: Movie) => (
               <div key={movie.id} className="movie-card-container ">
                 <MovieCard movie={movie} />
               </div>
