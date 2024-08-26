@@ -1,23 +1,47 @@
 "use client";
 import { Genres, Movie } from "@/lib/types";
 import React, { useEffect, useState } from "react";
-import { Getoptions, URLForGenreList, URLForMovieList } from "@/lib/global";
+import {
+  getMovieGenres,
+  getMoviesByPopular,
+  Getoptions,
+  URLForGenreList,
+} from "@/lib/global";
 import GenreCards from "@/app/(components)/GenreCards";
 
 const MovieGenre = () => {
   const [genreList, setGenreList] = useState<Genres[]>([]);
   const [movieList, setMovieList] = useState<Movie[]>([]);
 
-  useEffect(() => {
-    fetch(URLForMovieList, Getoptions)
-      .then((res) => res.json())
-      .then((json) => setMovieList(json.results))
-      .catch((err) => console.error("error:" + err));
+  const handleGetMoviesByPopular = async (page: number) => {
+    try {
+      const movies = await getMoviesByPopular(page);
+      setMovieList(movies);
+    } catch (error: Error | unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else if (error) {
+        console.log("Error is unknown");
+      }
+    }
+  };
 
-    fetch(URLForGenreList, Getoptions)
-      .then((res) => res.json())
-      .then((json) => setGenreList(json.genres))
-      .catch((err) => console.error("error:" + err));
+  const handleGetMovieGenres = async () => {
+    try {
+      const genres = await getMovieGenres();
+      setGenreList(genres);
+    } catch (error: Error | unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else if (error) {
+        console.log("Error is unknown");
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleGetMoviesByPopular(1);
+    handleGetMovieGenres();
   }, []);
 
   const getMoviesForGenre = (genreId: number) => {
