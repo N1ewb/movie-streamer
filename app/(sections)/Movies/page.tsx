@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import fetch from "node-fetch";
 import MovieCard from "@/app/(components)/MovieCard";
 import { Movie } from "@/lib/types";
-import { getMoviesByPopular, Getoptions } from "@/lib/global";
+import { getMoviesByPopular } from "@/lib/global";
 
 const MovieList = () => {
   const [movieList, setMovieList] = useState<Movie[]>([]);

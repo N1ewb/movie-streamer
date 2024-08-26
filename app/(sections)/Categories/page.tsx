@@ -1,12 +1,7 @@
 "use client";
 import { Genres, Movie } from "@/lib/types";
 import React, { useEffect, useState } from "react";
-import {
-  getMovieGenres,
-  getMoviesByPopular,
-  Getoptions,
-  URLForGenreList,
-} from "@/lib/global";
+import { getMovieGenres, getMoviesByPopular } from "@/lib/global";
 import GenreCards from "@/app/(components)/GenreCards";
 
 const MovieGenre = () => {

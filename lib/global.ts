@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { Genres, Movie } from './types';
 
-export const Getoptions = {
+const Getoptions = {
     method: "GET",
     headers: {
         accept: "application/json",
@@ -31,7 +31,6 @@ export const getMoviesByPopular = async (page: number): Promise<Movie[]>=> {
 };
 
 export const getMovieGenres = async (): Promise<Genres[]>=> {
-
     const URLForGenreList = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 
     try {
