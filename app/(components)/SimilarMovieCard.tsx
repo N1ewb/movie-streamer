@@ -12,7 +12,9 @@ const SimilarMovieCard: React.FC<SimilarMovieCardProps> = ({ movie }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleClickPlayMovie = () => {
     if (movie?.id) {
-      router.push(`/PlayMovie?id=${encodeURIComponent(movie.id.toString())}`);
+      router.push(
+        `/PlayMoviePage?id=${encodeURIComponent(movie.id.toString())}`
+      );
     } else {
       console.error("Movie ID is not defined.");
     }

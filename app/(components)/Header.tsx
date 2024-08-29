@@ -33,7 +33,9 @@ const Header = () => {
 
   useEffect(() => {
     if (searchValue) {
-      router.push(`/Search?query=${encodeURIComponent(searchValue.trim())}`);
+      router.push(
+        `/SearchPage?query=${encodeURIComponent(searchValue.trim())}`
+      );
     } else {
       router.push("/");
     }
