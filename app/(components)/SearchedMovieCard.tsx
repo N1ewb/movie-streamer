@@ -29,6 +29,7 @@ const SearchedMovieCard: React.FC<SearchedMovieProps> = ({ movie }) => {
         alt={`${movie.original_title} backdrop`}
         width={200}
         height={240}
+        style={{ height: "auto", width: "auto" }}
         className={
           !isHovered
             ? "object-cover opacity-[1] hover:scale-[1.1] hover:opacity-[0.4] transition-all ease-in-out duration-300 cursor-pointer"
