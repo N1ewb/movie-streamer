@@ -3,7 +3,7 @@ import SearchedMovieCard from "@/app/(components)/SearchedMovieCard";
 import { searchMovie } from "@/lib/global";
 import { Movie } from "@/lib/types";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
@@ -36,23 +36,25 @@ const SearchPage = () => {
   }, [searchQuery]);
 
   return (
-    <div className="search-page-container bg-black text-white min-h-screen w-full flex flex-col items-center p-10">
-      <div className="search-input-container h-[80px]"></div>
-      <div className="searched-movie-container flex flex-row flex-wrap justify-center items-center gap-6 p-10">
-        {searchQuery ? (
-          !isLoading ? (
-            searchedMovie &&
-            searchedMovie.map((movie: Movie) => (
-              <SearchedMovieCard key={movie.id} movie={movie} />
-            ))
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="search-page-container bg-black text-white min-h-screen w-full flex flex-col items-center p-10">
+        <div className="search-input-container h-[80px]"></div>
+        <div className="searched-movie-container flex flex-row flex-wrap justify-center items-center gap-6 p-10">
+          {searchQuery ? (
+            !isLoading ? (
+              searchedMovie &&
+              searchedMovie.map((movie: Movie) => (
+                <SearchedMovieCard key={movie.id} movie={movie} />
+              ))
+            ) : (
+              <div className="loading-container">Loading...</div>
+            )
           ) : (
-            <div className="loading-container">Loading...</div>
-          )
-        ) : (
-          <p>Search For Movies </p>
-        )}
+            <p>Search For Movies </p>
+          )}
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
