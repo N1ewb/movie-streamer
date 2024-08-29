@@ -35,8 +35,10 @@ const PlayMovie = () => {
     }
   };
   useEffect(() => {
-    window.addEventListener("resize", updateScreenSize);
-    return () => window.removeEventListener("resize", updateScreenSize);
+    if (typeof window !== undefined) {
+      window.addEventListener("resize", updateScreenSize);
+      return () => window.removeEventListener("resize", updateScreenSize);
+    }
   }, []);
   useEffect(() => {
     if (id) {

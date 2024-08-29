@@ -38,8 +38,10 @@ const MovieList = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", updateScreenSize);
-    return () => window.removeEventListener("resize", updateScreenSize);
+    if (typeof window !== undefined) {
+      window.addEventListener("resize", updateScreenSize);
+      return () => window.removeEventListener("resize", updateScreenSize);
+    }
   }, []);
 
   const handleSlideContainer = (direction: "left" | "right") => {
