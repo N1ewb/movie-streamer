@@ -16,15 +16,10 @@ const PlayMovie = () => {
   const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
   const movieListRef = useRef<HTMLDivElement>(null);
   const [screenSize, setScreenSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 0,
+    height: 0,
   });
-  const updateScreenSize = () => {
-    setScreenSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  };
+
   const handleSlideContainer = (direction: "left" | "right") => {
     if (movieListRef.current) {
       const scrollAmount = screenSize.width * 0.28;
@@ -34,8 +29,21 @@ const PlayMovie = () => {
       });
     }
   };
+
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+
+      const updateScreenSize = () => {
+        setScreenSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
+
       window.addEventListener("resize", updateScreenSize);
       return () => window.removeEventListener("resize", updateScreenSize);
     }

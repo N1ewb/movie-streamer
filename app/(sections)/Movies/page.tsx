@@ -9,8 +9,8 @@ const MovieList = () => {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const movieListRef = useRef<HTMLDivElement>(null);
   const [screenSize, setScreenSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 0,
+    height: 0,
   });
 
   const handleGetMoviesByPopular = async (page: number) => {
@@ -30,15 +30,20 @@ const MovieList = () => {
     handleGetMoviesByPopular(1);
   }, []);
 
-  const updateScreenSize = () => {
-    setScreenSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  };
-
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+
+      const updateScreenSize = () => {
+        setScreenSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
+
       window.addEventListener("resize", updateScreenSize);
       return () => window.removeEventListener("resize", updateScreenSize);
     }
