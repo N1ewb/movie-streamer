@@ -33,7 +33,7 @@ const TrailerCard = ({ movie, setIsHovered }: TrailerCardProps) => {
       }
     };
     handleGetMovieVideo(movie.id);
-  }, []);
+  }, [movie.id]);
 
   if (isLoading) {
     return (

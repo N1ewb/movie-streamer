@@ -49,7 +49,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
       }
     };
     handleGetMovieVideo(movie.id);
-  }, []);
+  }, [movie.id]);
 
   if (isLoading) {
     return <div className="div">Loading</div>;
