@@ -12,9 +12,7 @@ const SearchedMovieCard: React.FC<SearchedMovieProps> = ({ movie }) => {
 
   const handleClickPlayMovie = () => {
     if (movie?.id) {
-      router.push(
-        `/PlayMoviePage?id=${encodeURIComponent(movie.id.toString())}`
-      );
+      router.push(`/PlayMovie?id=${encodeURIComponent(movie.id.toString())}`);
     } else {
       console.error("Movie ID is not defined.");
     }
