@@ -17,7 +17,13 @@ const Features = () => {
               key={index}
               className="featured-images flex-shrink-0 w-[200px] items-center text-center"
             >
-              <Image src={show.src} alt={show.name} height={200} width={200} />
+              <Image
+                src={show.src}
+                alt={show.name}
+                height={200}
+                width={200}
+                style={{ height: "auto", width: "auto" }}
+              />
               <p className="">{show.name}</p>
             </div>
           ))

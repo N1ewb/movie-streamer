@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer base {
   :root {
@@ -67,7 +70,13 @@
     @apply bg-background text-foreground;
   }
 }
+*{
+    font-family: "Raleway", sans-serif;
+}
 
+body{
+    background-color: black;
+}
 .scrollbar-hide {
   -ms-overflow-style: none;  
   scrollbar-width: none;  
@@ -80,6 +89,48 @@
   display: none;
 }
 
+.card-container {
+    width: 300px;
+    height: 160px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .card-container:hover {
+    transform: scale(1.05); 
+    opacity: 0.9; 
+  }
+  
+  .trailer-card-container {
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.7); 
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .card-container:hover .trailer-card-container {
+    opacity: 1;
+  }
+  
+  .movie-details-container {
+    color: white;
+    text-align: center;
+  }
+  
+  .play-movie-page-container{
+    font-family: "Roboto", sans-serif;
+  }
+  
 
 @media screen and (max-width: 430px) {
   .anime-info-container {
@@ -154,6 +205,16 @@
   .category-image img{
       width: 155px;
   }
+  .movies-list-container, .popular-movies-content-container{
+    padding: 10px;
+  }
+  .card-container{
+    width: 300px;
+    height: auto;
+  }
+  .footer-container{
+    padding: 20px;
+  }
 }
 
 
@@ -217,9 +278,6 @@
   .categories-container{
       top: 100px;
   }
-  .footer-container{
-      top: 100px;
-  }
 
   .features-container  {
       top: 500px;
@@ -239,3 +297,4 @@
       width: 125px;
   }
 }
+

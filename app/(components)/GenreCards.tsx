@@ -37,7 +37,7 @@ const GenreCards: React.FC<MovieGenreProps> = ({ genre, movies }) => {
                 alt={movie.original_title}
                 width={160}
                 height={500}
-                style={{ height: "auto", width: "160px" }}
+                style={{ height: "auto", width: "auto" }}
                 className="object-cover"
               />
               <p>{movie.original_title}</p>
