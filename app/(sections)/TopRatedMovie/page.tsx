@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Movie } from "@/lib/types";
-import { getMoviesByPopular } from "@/lib/global";
-import PopularMovieCard from "@/app/(components)/PopularMovieCard";
-import Image from "next/image";
+import { getMoviesByPopular, getTopRatedMovies } from "@/lib/global";
 
-const MovieList = () => {
+import Image from "next/image";
+import PopularMovieCard from "@/app/(components)/Cards/PopularMovieCard";
+
+const TopRatedMovies = () => {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const movieListRef = useRef<HTMLDivElement>(null);
   const [screenSize, setScreenSize] = useState({
@@ -13,9 +14,9 @@ const MovieList = () => {
     height: 0,
   });
 
-  const handleGetMoviesByPopular = async (page: number) => {
+  const handleGetTopRatedMovies = async (page: number) => {
     try {
-      const movies = await getMoviesByPopular(page);
+      const movies = await getTopRatedMovies(page);
       setMovieList(movies);
     } catch (error: Error | unknown) {
       if (error instanceof Error) {
@@ -27,7 +28,7 @@ const MovieList = () => {
   };
 
   useEffect(() => {
-    handleGetMoviesByPopular(1);
+    handleGetTopRatedMovies(1);
   }, []);
 
   useEffect(() => {
@@ -62,9 +63,9 @@ const MovieList = () => {
   return (
     <div className=" movies-list-container p-[45px] max-w-full text-white z-20">
       <div className="movies-list-header">
-        <h1 className="font-semibold text-3xl">Popular</h1>
+        <h1 className="font-semibold text-3xl">Toprated Movies</h1>
       </div>
-      <div className=" popular-movies-content-container flex flex-row items-center justify-between p-[30px] w-full">
+      <div className=" toprated-movies-content-container flex flex-row items-center justify-between p-[30px] w-full">
         <button
           className="cursor-pointer"
           onClick={() => handleSlideContainer("left")}
@@ -108,4 +109,4 @@ const MovieList = () => {
   );
 };
 
-export default MovieList;
+export default TopRatedMovies;

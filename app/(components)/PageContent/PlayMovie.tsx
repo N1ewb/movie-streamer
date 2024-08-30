@@ -1,11 +1,11 @@
 "use client";
 
-import SimilarMovieCard from "@/app/(components)/SimilarMovieCard";
 import { getMovieByID, getSimilarMovie } from "@/lib/global";
 import { Movie, MovieDetail } from "@/lib/types";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import SimilarMovieCard from "../Cards/SimilarMovieCard";
 
 const PlayMovie = () => {
   const searchParams = useSearchParams();

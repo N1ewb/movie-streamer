@@ -1,4 +1,4 @@
-import PlayMovie from "@/app/(components)/PlayMovie";
+import PlayMovie from "@/app/(components)/PageContent/PlayMovie";
 import React, { Suspense } from "react";
 
 const PlayMoviePage = () => {

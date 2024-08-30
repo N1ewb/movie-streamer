@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { VolumeX, Volume2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import PlayMovieButton from "./Buttons/PlayMovieButton";
+import MoreInfoButton from "./Buttons/MoreInfoButton";
 
 interface HeroMoviesProps {
   movie: Movie;
@@ -15,17 +17,16 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
 
+  const PlayButtonClass =
+    "px-8 py-4 bg-white text-black rounded-[7px] text-2xl font-bold flex flex-row items-center gap-1 hover:bg-[#ffffffc0]";
+  const MoreInfoButtonClass =
+    "px-8 py-4 bg-[#7575757a] text-white rounded-[7px] text-2xl font-semibold flex flex-row items-center gap-1 hover:bg-[#75757544]";
+
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
 
-  const handleClickPlayMovie = () => {
-    if (movie?.id) {
-      router.push(`/PlayMovie?id=${encodeURIComponent(movie.id.toString())}`);
-    } else {
-      console.error("Movie ID is not defined.");
-    }
-  };
+  const handleClickMoreInfo = () => {};
 
   useEffect(() => {
     const handleGetMovieVideo = async (movieID: number) => {
@@ -97,29 +98,18 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
           <p>{movie.overview}</p>
         </div>
         <div className="hero-movie-play-details flex flex-row w-[55%] justify-between">
-          <button
-            onClick={() => handleClickPlayMovie()}
-            className="px-8 py-4 bg-white text-black rounded-[7px] text-2xl font-bold flex flex-row items-center gap-1 hover:bg-[#ffffffc0]"
-          >
-            <Image
-              src="/play-button-arrowhead.png"
-              alt="Play"
-              width={25}
-              height={25}
-              style={{ height: "auto", width: "auto" }}
-            />
-            Play
-          </button>
-          <button className="px-8 py-4 bg-[#7575757a] text-white rounded-[7px] text-2xl font-semibold flex flex-row items-center gap-1 hover:bg-[#75757544]">
-            <Image
-              src="/info.png"
-              alt="Play"
-              width={25}
-              height={25}
-              style={{ height: "auto", width: "auto" }}
-            />
-            More options
-          </button>
+          <PlayMovieButton
+            movie={movie}
+            PlayButtonClass={PlayButtonClass}
+            imgWidth={25}
+            imgHeight={25}
+          />
+          <MoreInfoButton
+            movie={movie}
+            MoreInfoButtonClass={MoreInfoButtonClass}
+            imgWidth={25}
+            imgHeight={25}
+          />
         </div>
       </div>
     </div>

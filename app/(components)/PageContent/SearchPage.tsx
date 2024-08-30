@@ -1,9 +1,10 @@
 "use client";
-import SearchedMovieCard from "@/app/(components)/SearchedMovieCard";
+
 import { searchMovie } from "@/lib/global";
 import { Movie } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import SearchedMovieCard from "../Cards/SearchedMovieCard";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();

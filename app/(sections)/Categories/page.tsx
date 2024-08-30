@@ -2,7 +2,7 @@
 import { Genres, Movie } from "@/lib/types";
 import React, { useEffect, useState } from "react";
 import { getMovieGenres, getMoviesByPopular } from "@/lib/global";
-import GenreCards from "@/app/(components)/GenreCards";
+import GenreCards from "@/app/(components)/Cards/GenreCards";
 
 const MovieGenre = () => {
   const [genreList, setGenreList] = useState<Genres[]>([]);
