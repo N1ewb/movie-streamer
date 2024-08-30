@@ -61,7 +61,7 @@ const MovieList = () => {
   };
 
   return (
-    <div className=" movies-list-container p-[45px] max-w-full text-white z-20">
+    <div className=" movies-list-container relative p-[45px] max-w-full text-white z-20">
       <div className="movies-list-header">
         <h1 className="font-semibold text-3xl">Popular</h1>
       </div>

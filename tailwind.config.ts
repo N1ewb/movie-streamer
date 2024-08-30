@@ -17,8 +17,36 @@ const config = {
         "2xl": "1400px",
       },
     },
-    fontFamily: {
-      Roboto: ["Roboto"],
+    screens: {
+      '2xl': {'max': '1535px'},
+      // => @media (max-width: 1535px) { ... }
+
+      '1xl': {'max': '1366px'},
+      // => @media (max-width: 1366px) { ... }
+
+      'xl': {'max': '1279px'},
+      // => @media (max-width: 1279px) { ... }
+
+      'lg': {'max': '1023px'},
+      // => @media (max-width: 1023px) { ... }
+
+      'md': {'max': '767px'},
+      // => @media (max-width: 767px) { ... }
+
+      'sm': {'max': '639px'},
+      // => @media (max-width: 639px) { ... }
+
+      'xsm': {'max': '560px'},
+      // => @media (max-width: 560px) { ... }
+
+      'xxsm': {'max': '430px'},
+      // => @media (max-width: 430px) { ... }
+
+      'xxxsm': {'max': '390px'},
+      // => @media (max-width: 390px) { ... }
+
+      'xxxxsm': {'max': '375px'},
+      // => @media (max-width: 375px) { ... }
     },
     extend: {
       colors: {

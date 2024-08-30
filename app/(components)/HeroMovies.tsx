@@ -18,9 +18,9 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   const [isMuted, setIsMuted] = useState(true);
 
   const PlayButtonClass =
-    "px-8 py-4 bg-white text-black rounded-[7px] text-2xl font-bold flex flex-row items-center gap-1 hover:bg-[#ffffffc0]";
+    "px-8 py-4 bg-white text-black rounded-[7px] text-2xl font-bold flex flex-row items-center gap-1 hover:bg-[#ffffffc0] xl:px-6 xl:py-3 xl:text-xl lg:text-[16px]";
   const MoreInfoButtonClass =
-    "px-8 py-4 bg-[#7575757a] text-white rounded-[7px] text-2xl font-semibold flex flex-row items-center gap-1 hover:bg-[#75757544]";
+    "px-8 py-4 bg-[#7575757a] text-white rounded-[7px] text-2xl font-semibold flex flex-row items-center gap-1 hover:bg-[#75757544]  xl:px-6 xl:py-3 xl:text:xl lg:text-[16px]";
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -57,10 +57,10 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   }
 
   return (
-    <div className="absolute h-[100vh] w-full">
+    <div className="relative h-[100vh] w-full xl:h-[80vh]">
       <div
         style={{
-          position: "relative",
+          position: "absolute",
           width: "100%",
           height: "0",
           paddingBottom: "56.25%",
@@ -87,17 +87,17 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
         ></iframe>
         <button
           onClick={toggleMute}
-          className="absolute bottom-[280px] right-[120px] bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-50"
+          className="absolute bottom-[280px] right-[120px] bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-50 1xl:bottom-[%] 1xl:right-[100px] lg:bottom-[150px]"
         >
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
       </div>
-      <div className="hero-movie-detials-container flex flex-col absolute z-50 top-[20%] left-10 w-[40%] h-[50%] justify-evenly">
+      <div className="hero-movie-detials-container flex flex-col absolute z-50 top-[20%] left-10 w-[40%] h-[50%] justify-evenly lg:w-[50%]">
         <div className="hero-movie-title flex flex-col">
-          <h1 className="font-extrabold text-8xl">{movie.original_title}</h1>
-          <p>{movie.overview}</p>
+          <h1 className="font-extrabold text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl">{movie.original_title}</h1>
+          <p className="xl:text-[14px] lg:truncate">{movie.overview}</p>
         </div>
-        <div className="hero-movie-play-details flex flex-row w-[55%] justify-between">
+        <div className="hero-movie-play-details flex flex-row gap-5">
           <PlayMovieButton
             movie={movie}
             PlayButtonClass={PlayButtonClass}
