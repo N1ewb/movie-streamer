@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { heroMovies } from "@/lib/temp";
 import { getMoviesByPopular } from "@/lib/global";
 import { Movie } from "@/lib/types";
 import HeroMovies from "@/app/(components)/HeroMovies";
@@ -43,7 +42,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="hero-page-container relative text-white flex flex-row items-center h-[75vh] w-full ">
+    <div className="hero-page-container text-white flex flex-row items-center h-[75vh] w-full ">
       {isLoading ? (
         <p>Loading...</p>
       ) : (

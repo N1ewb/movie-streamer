@@ -96,3 +96,8 @@ export interface SpokenLanguage {
   iso_639_1: string;
   name: string;
 }
+
+export interface Section {
+  header: string;
+  fetch: Promise<void>;
+}

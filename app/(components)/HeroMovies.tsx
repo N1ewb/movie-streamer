@@ -3,7 +3,6 @@ import { Movie, MovieVideo } from "@/lib/types";
 import React, { useEffect, useState } from "react";
 import { VolumeX, Volume2 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import PlayMovieButton from "./Buttons/PlayMovieButton";
 import MoreInfoButton from "./Buttons/MoreInfoButton";
 
@@ -12,7 +11,6 @@ interface HeroMoviesProps {
 }
 
 const HeroMovies = ({ movie }: HeroMoviesProps) => {
-  const router = useRouter();
   const [movieVideos, setMovieVideos] = useState<MovieVideo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -25,8 +23,6 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
-
-  const handleClickMoreInfo = () => {};
 
   useEffect(() => {
     const handleGetMovieVideo = async (movieID: number) => {
@@ -57,7 +53,16 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   }
 
   return (
-    <div className="relative h-[100vh] w-full xl:h-[80vh]">
+    <div className="relative h-[100vh] w-full xl:h-[80vh] xsm:absolute flex justify-center">
+      <div className="xsm-bg absolute -top-[11%] hidden xsm:flex w-[95%] h-screen z-30 xxxxsm:h-[60vh]">
+        <Image
+          className="rounded-sm border-solid border-2 border-[#323232] absolute w-[100%] h-[auto] "
+          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+          alt={`${movie.original_title}-poster`}
+          width={430}
+          height={600}
+        />
+      </div>
       <div
         style={{
           position: "absolute",
@@ -65,6 +70,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
           height: "0",
           paddingBottom: "56.25%",
         }}
+        className="xsm:hidden"
       >
         <iframe
           style={{
@@ -92,10 +98,17 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
       </div>
-      <div className="hero-movie-detials-container flex flex-col absolute z-50 top-[20%] left-10 w-[40%] h-[50%] justify-evenly lg:w-[50%]">
-        <div className="hero-movie-title flex flex-col">
-          <h1 className="font-extrabold text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl">{movie.original_title}</h1>
-          <p className="xl:text-[14px] lg:truncate">{movie.overview}</p>
+      <div className="hero-movie-detials-container flex flex-col absolute top-[20%] z-50  left-10 w-[40%] h-[51%] justify-evenly lg:w-[50%] xsm:w-[100%] xsm:left-0 xsm:items-center xsm:bg-gradient-to-t xsm:from-black xsm:via-[#000000d7] xsm:to-transparent xsm:top-[45%] xxsm:top-[22%] xxxxsm:top-[43%]">
+        <div className="hero-movie-title flex flex-col xsm:p-3 xsm:justify-center w-[100%] ">
+          <h1 className="font-extrabold text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl xsm:text-4xl xsm:text-center xxxxsm:text-3xl">
+            {movie.original_title}
+          </h1>
+          <p className="xl:text-[14px] lg:truncate flex flex-row xsm:justify-center xsm:w-[100%]">
+            <span className="xsm:hidden block">{movie.overview}</span>
+            <span className="xsm:block hidden">
+              {movie.genre_ids.map((genre: any) => genre.id)}
+            </span>
+          </p>
         </div>
         <div className="hero-movie-play-details flex flex-row gap-5">
           <PlayMovieButton
