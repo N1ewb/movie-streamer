@@ -54,7 +54,7 @@ const Hero = () => {
           >
             Left
           </button>
-          <div className="movie-container h-[100%] w-full">
+          <div className="movie-container h-[100%] xl:h-[50%] w-full">
             {movieList.length > 0 && (
               <HeroMovies movie={movieList[activeNumber]} />
             )}

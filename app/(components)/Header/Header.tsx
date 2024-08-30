@@ -43,26 +43,22 @@ const Header = () => {
 
   return (
     <div
-      className={
-        scrolled
-          ? `navbar-container fixed flex flex-row w-full justify-between items-center p-5 text-white z-50 transition-colors duration-500 ease-in-out bg-[#141414]`
-          : `navbar-container fixed flex flex-row w-full justify-between items-center p-5 text-white z-50 transition-colors duration-500 ease-in-out bg-gradient-to-b from-[#000000]`
-      }
+      className={`navbar-container fixed flex flex-row w-full justify-between items-center p-5 text-white z-50 transition-colors duration-500 ease-in-out ${scrolled ? 'bg-[#141414]' : 'bg-gradient-to-b from-[#000000]'}`}
     >
       <div className="logo-container w-[33%]">
         <Link href="/">
           <Image
-            className="cursor-pointer"
+            className="cursor-pointer xl:w-[150px] xl:h-[auto]"
             src="/Logo.png"
             alt="logo"
             height={100}
             width={200}
             priority
-            style={{ height: "auto", width: "auto" }}
+            
           />
         </Link>
       </div>
-      <div className="nav-links flex flex-row justify-between w-[33%] align-middle items-center">
+      <div className="nav-links flex flex-row justify-between w-[33%] align-middle items-center xsm:hidden">
         <Link
           className="m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out"
           href="#"
@@ -98,11 +94,10 @@ const Header = () => {
               name="search"
               type="text"
               placeholder="Search "
-              className={`absolute right-0 transition-all duration-500 ease-in-out text-black ${
-                searchClicked
+              className={`absolute right-0 transition-all duration-500 ease-in-out text-black ${searchClicked
                   ? "w-[200px] opacity-100 pl-3"
                   : "w-0 opacity-0 pl-0"
-              }`}
+                }`}
               onBlur={() => handleSearchClick()}
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}

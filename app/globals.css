@@ -133,42 +133,7 @@ body{
   
 
 @media screen and (max-width: 430px) {
-  .anime-info-container {
-      display: flex;
-      flex-direction: column-reverse;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      background-color: transparent;
-      
-  }
-  .anime-info {
-      width: 100%;
-      top: 200px;
-  }
-  .anime-info h1 {
-      font-size: 25px;
-      width: 300px;
-  }
-  .anime-info p{
-      display: none;
-  }
-  .anime-info button{
-      width: 300px;
-
-  }
-  .large-screen-image {
-      display: none;
-  }
-  .small-screen-image {
-  display: block;
-  }
-  .features-container  {
-      top: 750px;
-  }
-  .categories-container{
-      top: 130px;
-  }
+  
   .footer-content-container{
       display: flex;
       flex-direction: column;
@@ -189,22 +154,7 @@ body{
       justify-content: center;
       align-items: center;
   }
-  .featured-images {
-      width: 160px;
-      height: auto;
-  }
-  .featured-images img {
-      width: 160px;
-  }
-  .category-container{
-      padding: 10px;
-  }
-  .category-image{
-      width: 155px;
-  }
-  .category-image img{
-      width: 155px;
-  }
+  
   .movies-list-container, .popular-movies-content-container{
     padding: 10px;
   }

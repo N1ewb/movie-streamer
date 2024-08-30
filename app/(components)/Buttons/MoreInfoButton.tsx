@@ -27,7 +27,7 @@ const MoreInfoButton = ({
         alt="Play"
         width={imgHeight ? imgHeight : 25}
         height={imgWidth ? imgWidth : 25}
-        style={{ height: "auto", width: "auto" }}
+        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
       />
       More options
     </button>
