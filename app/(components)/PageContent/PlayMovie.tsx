@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import SimilarMovieCard from "../Cards/SimilarMovieCard";
+import ReactPlayer from "react-player";
 
 const PlayMovie = () => {
   const searchParams = useSearchParams();
@@ -22,7 +23,7 @@ const PlayMovie = () => {
 
   const handleSlideContainer = (direction: "left" | "right") => {
     if (movieListRef.current) {
-      const scrollAmount = screenSize.width * 0.28;
+      const scrollAmount = screenSize.width * 0.27;
       movieListRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -77,7 +78,7 @@ const PlayMovie = () => {
 
   useEffect(() => {
     if (id) {
-      const URLVidSrc = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
+      const URLVidSrc = `https://vidsrc.net/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`;
       setVideoUrl(URLVidSrc);
     }
   }, [id]);
@@ -90,18 +91,17 @@ const PlayMovie = () => {
     <div className="play-movie-page-container min-h-screen w-full text-white flex flex-col items-center pt-32 font-Roboto">
       <div className="movie-player-container w-full h-100% flex justify-center items-center ">
         <iframe
-          className="w-[80%] h-[85vh] rounded-[5px]"
+          className="w-[80%] h-[85vh] rounded-[3px] border-solid border-2 border-[#323232] lg:h-[70vh] md:h-[60vh] sm:h-[50vh]"
           src={videoURL}
-          title="YouTube video player"
+          title={movie?.original_title}
           frameBorder="0"
           allowFullScreen
           allow="autoplay; encrypted-media; "
-          referrerPolicy="strict-origin-when-cross-origin"
         ></iframe>
       </div>
-      <div className="play-movie-bottom-content w-[80%] py-8 pb-80 flex flex-row justify-between ">
-        <div className="more-movie-details flex flex-row w-[60%] border-solid border-2 border-[#2f3031] bg-[#0f0f0f] p-3 justify-between rounded-[3px]">
-          <div className="left-detail w-[30%]">
+      <div className="play-movie-bottom-content w-[80%] pt-8 pb-80 flex flex-row justify-between lg:flex-col">
+        <div className="more-movie-details flex flex-row w-[60%] border-solid border-2 border-[#2f3031] bg-[#0f0f0f] p-3 justify-between rounded-[3px] lg:w-[100%] lg:gap-2 md:flex-col">
+          <div className="left-detail w-[30%] md:w-[100%] md:flex md:justify-center">
             <Image
               src={
                 movie?.belongs_to_collection !== null
@@ -113,8 +113,8 @@ const PlayMovie = () => {
               width={196}
             />
           </div>
-          <div className="right-detail w-[70%] flex flex-col gap-3">
-            <h1 className="text-3xl font-bold font-Roboto ">
+          <div className="right-detail w-[70%] flex flex-col gap-3 md:w-[100%] ">
+            <h1 className="text-3xl font-bold font-Roboto md:text-center">
               {movie?.original_title}
             </h1>
             <p className="flex flex-row gap-4 font-Roboto">
@@ -126,7 +126,7 @@ const PlayMovie = () => {
                 {movie?.release_date}
               </span>
             </p>
-            <div className="movie-genres-list flex flex-row gap-4">
+            <div className="movie-genres-list flex flex-row flex-wrap gap-4">
               <p className="text-[#ffffff8f]">Genres:</p>
               {movie && movie.genres.length !== 0
                 ? movie.genres.map((genre) => (
@@ -149,7 +149,7 @@ const PlayMovie = () => {
             </p>
           </div>
         </div>
-        <div className="similar-movies-container w-[40%] px-5 py-2">
+        <div className="similar-movies-container w-[40%] px-5 py-2 lg:w-[100%] md:px-1">
           <h1 className="font-semibold text-1xl">Related Movies {">>"}</h1>
           <div className="similar-movies flex flex-row overflow-auto w-[100%] scrollbar-hide gap-3">
             <button

@@ -9,6 +9,8 @@ interface MovieListProps {
   movieListRef: React.RefObject<HTMLDivElement>;
   section: any;
   movieList: Movie[];
+  setSelectedMovie: React.Dispatch<React.SetStateAction<Movie | undefined>>;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MovieList = ({
@@ -16,6 +18,8 @@ const MovieList = ({
   movieListRef,
   section,
   movieList,
+  setSelectedMovie,
+  setShowModal,
 }: MovieListProps) => {
   useEffect(() => {
     section.fetch();
@@ -35,8 +39,8 @@ const MovieList = ({
             className="hover:-translate-x-1 transition-transform duration-300"
             src="/left-arrow.png"
             alt="left"
-            width={25}
-            height={25}
+            width={15}
+            height={15}
             style={{ height: "auto", width: "auto" }}
           />
         </button>
@@ -46,7 +50,11 @@ const MovieList = ({
         >
           {movieList.map((movie: Movie) => (
             <div key={movie.id} className="flex movie-card-container">
-              <PopularMovieCard movie={movie} />
+              <PopularMovieCard
+                movie={movie}
+                setSelectedMovie={setSelectedMovie}
+                setShowModal={setShowModal}
+              />
             </div>
           ))}
         </div>
@@ -58,8 +66,8 @@ const MovieList = ({
             className="hover:translate-x-1 transition-transform duration-300"
             src="/right-arrow.png"
             alt="right"
-            width={25}
-            height={25}
+            width={15}
+            height={15}
             style={{ height: "auto", width: "auto" }}
           />
         </button>

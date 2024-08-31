@@ -5,6 +5,7 @@ import { VolumeX, Volume2 } from "lucide-react";
 import Image from "next/image";
 import PlayMovieButton from "./Buttons/PlayMovieButton";
 import MoreInfoButton from "./Buttons/MoreInfoButton";
+import MovieModal from "./MovieModal/MovieModal";
 
 interface HeroMoviesProps {
   movie: Movie;
@@ -12,8 +13,9 @@ interface HeroMoviesProps {
 
 const HeroMovies = ({ movie }: HeroMoviesProps) => {
   const [movieVideos, setMovieVideos] = useState<MovieVideo[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const PlayButtonClass =
     "px-8 py-4 bg-white text-black rounded-[7px] text-2xl font-bold flex flex-row items-center gap-1 hover:bg-[#ffffffc0] xl:px-6 xl:py-3 xl:text-xl lg:text-[16px]";
@@ -22,6 +24,11 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
+  };
+
+  const handleMoreInfoClick = () => {
+    setShowModal(true);
+    console.log("clicked");
   };
 
   useEffect(() => {
@@ -54,7 +61,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
 
   return (
     <div className="relative h-[100vh] w-full xl:h-[80vh] xsm:absolute flex justify-center">
-      <div className="xsm-bg absolute -top-[11%] hidden xsm:flex w-[95%] h-screen z-30 xxxxsm:h-[60vh]">
+      <div className="xsm-bg absolute -top-[11%] hidden md:flex w-[85%] h-screen z-30 xxxxsm:h-[60vh]">
         <Image
           className="rounded-sm border-solid border-2 border-[#323232] absolute w-[100%] h-[auto] "
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
@@ -70,7 +77,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
           height: "0",
           paddingBottom: "56.25%",
         }}
-        className="xsm:hidden"
+        className="md:hidden"
       >
         <iframe
           style={{
@@ -98,14 +105,14 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
       </div>
-      <div className="hero-movie-detials-container flex flex-col absolute top-[20%] z-50  left-10 w-[40%] h-[51%] justify-evenly lg:w-[50%] xsm:w-[100%] xsm:left-0 xsm:items-center xsm:bg-gradient-to-t xsm:from-black xsm:via-[#000000d7] xsm:to-transparent xsm:top-[45%] xxsm:top-[22%] xxxxsm:top-[43%]">
+      <div className="hero-movie-detials-container flex flex-col absolute top-[20%] z-30  left-10 w-[40%] h-[51%] justify-evenly lg:w-[50%] md:w-[100%] md:left-0 md:items-center md:bg-gradient-to-t md:from-black md:via-[#000000d7] md:to-transparent md:top-[73%] sm:top-[60%] xsm:top-[37%] xxsm:top-[22%] xxxxsm:top-[43%]">
         <div className="hero-movie-title flex flex-col xsm:p-3 xsm:justify-center w-[100%] ">
-          <h1 className="font-extrabold text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl xsm:text-4xl xsm:text-center xxxxsm:text-3xl">
+          <h1 className="font-extrabold text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl xsm:text-4xl md:text-center xxxxsm:text-3xl">
             {movie.original_title}
           </h1>
           <p className="xl:text-[14px] lg:truncate flex flex-row xsm:justify-center xsm:w-[100%]">
-            <span className="xsm:hidden block">{movie.overview}</span>
-            <span className="xsm:block hidden">
+            <span className="md:hidden block">{movie.overview}</span>
+            <span className="md:block hidden">
               {movie.genre_ids.map((genre: any) => genre.id)}
             </span>
           </p>
@@ -118,13 +125,18 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
             imgHeight={25}
           />
           <MoreInfoButton
-            movie={movie}
+            onClick={() => handleMoreInfoClick()}
             MoreInfoButtonClass={MoreInfoButtonClass}
             imgWidth={25}
             imgHeight={25}
           />
         </div>
       </div>
+      <MovieModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        movie={movie}
+      />
     </div>
   );
 };

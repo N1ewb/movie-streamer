@@ -7,12 +7,15 @@ import {
 } from "@/lib/global";
 import { Movie } from "@/lib/types";
 import MovieList from "@/app/(components)/MoviesStrip";
+import MovieModal from "@/app/(components)/MovieModal/MovieModal";
 
 const MovieSection: React.FC = () => {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
   const [topRatedMovies, setTopRatedMovies] = useState<Movie[]>([]);
   const [upcomingMovies, setUpcomingMovies] = useState<Movie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie>();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const fetchMovies = async (
     fetcher: (page: number) => Promise<Movie[]>,
@@ -64,7 +67,7 @@ const MovieSection: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col relative items-center justify-between max-w-full xsm:top-44  xxsm:top-10 xxxxsm:top-28">
+    <div className="flex flex-col items-center justify-between max-w-full md:top-72 sm:top-80 xsm:top-36  xxsm:top-10 xxxxsm:top-40 text-white">
       {movieSections.map((section, index) => (
         <div key={index} className="flex movie-list-page-container max-w-full">
           <MovieList
@@ -81,9 +84,18 @@ const MovieSection: React.FC = () => {
             movieListRef={section.movieListRef}
             section={section}
             movieList={section.movies}
+            setSelectedMovie={setSelectedMovie}
+            setShowModal={setShowModal}
           />
         </div>
       ))}
+      {selectedMovie && (
+        <MovieModal
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          movie={selectedMovie}
+        />
+      )}
     </div>
   );
 };

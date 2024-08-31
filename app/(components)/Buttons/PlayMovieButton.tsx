@@ -34,7 +34,7 @@ const PlayMovieButton = ({
         alt="Play"
         width={imgHeight ? imgHeight : 25}
         height={imgWidth ? imgWidth : 25}
-         className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
+        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
       />
       Play
     </button>

@@ -1,27 +1,25 @@
 import { Movie } from "@/lib/types";
 import Image from "next/image";
+
 import React from "react";
 
 interface MoreInfoButtonProps {
-  movie: Movie;
   MoreInfoButtonClass: string;
   imgWidth: number;
   imgHeight: number;
+
+  onClick: () => void;
 }
 
 const MoreInfoButton = ({
-  movie,
   MoreInfoButtonClass,
   imgWidth,
   imgHeight,
-}: MoreInfoButtonProps) => {
-  const handleClickMoreInfo = () => {};
 
+  onClick,
+}: MoreInfoButtonProps) => {
   return (
-    <button
-      onClick={() => handleClickMoreInfo()}
-      className={MoreInfoButtonClass}
-    >
+    <button onClick={onClick} className={MoreInfoButtonClass}>
       <Image
         src="/info.png"
         alt="Play"

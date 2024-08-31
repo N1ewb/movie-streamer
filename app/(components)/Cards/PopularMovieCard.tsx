@@ -3,33 +3,34 @@ import React, { useState } from "react";
 import { Movie } from "@/lib/types";
 import PlayMovieButton from "../Buttons/PlayMovieButton";
 import MoreInfoButton from "../Buttons/MoreInfoButton";
-import { useRouter } from "next/navigation";
+import MovieModal from "../MovieModal/MovieModal";
 
 interface MovieCardProps {
   movie: Movie;
+  setSelectedMovie: React.Dispatch<React.SetStateAction<Movie | undefined>>;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PopularMovieCard: React.FC<MovieCardProps> = ({ movie }) => {
-  const router = useRouter();
+const PopularMovieCard: React.FC<MovieCardProps> = ({
+  movie,
+  setSelectedMovie,
+  setShowModal,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const PlayButtonClass =
     "bg-white py-1 px-4 rounded-[3px] text-black hover:bg-[#ffffffc0] flex flex-row gap-2 items-center";
   const MoreInfoClass =
     "bg-[#7575757a] py-1 px-4 rounded-[3px] text-white hover:bg-[#75757544] flex flex-row gap-2 items-center";
-  const handleClickPlayButton = () => {
-    if (movie?.id) {
-      router.push(`/PlayMovie?id=${encodeURIComponent(movie.id.toString())}`);
-    } else {
-      console.error("Movie ID is not defined.");
-    }
-  };
 
-  const handleClickMoreInfo = () => {};
+  const handleMoreInfoClick = () => {
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
 
   return (
     <div
-      className={`card-container relative text-white flex flex-col z-0 w-[300px] h-[auto]`}
+      className={`card-container text-white flex flex-col z-0 w-[300px] h-[auto]`}
     >
       <Image
         onMouseEnter={() => setIsHovered(true)}
@@ -64,7 +65,7 @@ const PopularMovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               imgHeight={15}
             />
             <MoreInfoButton
-              movie={movie}
+              onClick={() => handleMoreInfoClick()}
               MoreInfoButtonClass={MoreInfoClass}
               imgWidth={15}
               imgHeight={15}
