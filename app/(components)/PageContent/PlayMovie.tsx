@@ -77,8 +77,9 @@ const PlayMovie = () => {
 
   useEffect(() => {
     if (id) {
-      const URLVidSrc = `https://vidsrc.net/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`;
-      setVideoUrl(URLVidSrc);
+      // const URLVidSrc = `https://vidsrc.net/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`;
+      const URLStreamBucket = ` https://multiembed.mov/?video_id=${id}&tmdb=1`;
+      setVideoUrl(URLStreamBucket);
     }
   }, [id]);
 

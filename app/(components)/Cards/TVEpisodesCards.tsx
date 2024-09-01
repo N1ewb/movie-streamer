@@ -1,14 +1,29 @@
-import { TVEpisode } from "@/lib/types";
+import { Movie, TVEpisode, TVSeries } from "@/lib/types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface TVEpisodesCardsProps {
   episode: TVEpisode;
+  show: TVSeries;
 }
 
-const TVEpisodesCards = ({ episode }: TVEpisodesCardsProps) => {
+const TVEpisodesCards = ({ episode, show }: TVEpisodesCardsProps) => {
+  const router = useRouter();
+
+  const handleWatchEpisode = () => {
+    router.push(
+      `/PlayTV?id=${encodeURIComponent(
+        show.id.toString()
+      )}&ep=${encodeURIComponent(episode.episode_number.toString())}`
+    );
+  };
+
   return (
-    <div className="tv-episode-card flex flex-row justify-between items-center w-[10%%] border-b-[1px] border-solid border-[#585858] pb-3">
+    <div
+      onClick={() => handleWatchEpisode()}
+      className="tv-episode-card flex flex-row justify-between items-center w-[10%%] border-b-[1px] border-solid border-[#585858] pb-3"
+    >
       <h1>{episode.episode_number}</h1>
       <Image
         src={

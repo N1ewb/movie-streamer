@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 const PlayTV = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const ep = searchParams.get("ep");
   const [videoURL, setVideoUrl] = useState<string>();
   const [tv, setTV] = useState<TVSeries>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -71,9 +72,10 @@ const PlayTV = () => {
   }, [id]);
 
   useEffect(() => {
-    if (id) {
-      const URLVidSrc = `https://vidsrc.xyz/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`;
-      setVideoUrl(URLVidSrc);
+    if (id && ep) {
+      // const URLVidSrc = `https://vidsrc.xyz/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`;
+      const URLStreamBucket = `https://multiembed.mov/?video_id=${id}&tmdb=1&s=1&e=${ep}`;
+      setVideoUrl(URLStreamBucket);
     }
   }, [id]);
 

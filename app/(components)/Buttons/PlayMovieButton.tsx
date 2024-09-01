@@ -9,6 +9,7 @@ interface PlayMovieButtonProps {
   imgHeight: number;
   show: Movie;
   type: "movie" | "tv";
+  epNumber: string;
 }
 
 const PlayMovieButton = ({
@@ -18,6 +19,7 @@ const PlayMovieButton = ({
   imgHeight,
   show,
   type,
+  epNumber,
 }: PlayMovieButtonProps) => {
   const router = useRouter();
 
@@ -26,7 +28,11 @@ const PlayMovieButton = ({
       if (type === "movie") {
         router.push(`/PlayMovie?id=${encodeURIComponent(show.id.toString())}`);
       } else if (type === "tv") {
-        router.push(`/PlayTV?id=${encodeURIComponent(show.id.toString())}`);
+        router.push(
+          `/PlayTV?id=${encodeURIComponent(
+            show.id.toString()
+          )}&ep=${encodeURIComponent(epNumber)}`
+        );
       } else {
         console.log("Invalid Type");
       }

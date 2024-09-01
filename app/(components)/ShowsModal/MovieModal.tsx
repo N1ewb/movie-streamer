@@ -218,6 +218,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
             imgWidth={15}
             imgHeight={15}
             show={movie}
+            epNumber={"1"}
           />
           <div className="div flex flex-row flex-wrap gap-4 w-[20%]">
             <p>
@@ -271,9 +272,13 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
                   isExtended ? "max-h-[130vh] overflow-hidden" : ""
                 }`}
               >
-                {episodeList.length !== 0 ? (
+                {currentTV && episodeList.length !== 0 ? (
                   episodeList.map((episode: TVEpisode) => (
-                    <TVEpisodesCards key={episode.id} episode={episode} />
+                    <TVEpisodesCards
+                      key={episode.id}
+                      episode={episode}
+                      show={currentTV}
+                    />
                   ))
                 ) : (
                   <p>No Episodes Available</p>

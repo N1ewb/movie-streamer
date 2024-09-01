@@ -69,6 +69,7 @@ const PopularMovieCard: React.FC<MovieCardProps> = ({
               imgWidth={15}
               imgHeight={15}
               type={type}
+              epNumber="1"
             />
             <MoreInfoButton
               onClick={() => handleMoreInfoClick()}
