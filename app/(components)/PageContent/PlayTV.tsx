@@ -1,25 +1,62 @@
 "use client";
 
-import { getTVSeriesDetails } from "@/lib/global";
-import { Movie, TVSeries } from "@/lib/types";
+import { getSimilarTV, getTVEpisodes, getTVSeriesDetails } from "@/lib/global";
+import { Movie, TVEpisode, TVSeason, TVSeries } from "@/lib/types";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import SimilarMovieCard from "../Cards/SimilarMovieCard";
+import SimilarTVCard from "../Cards/SimilarTVCard";
 // import SimilarMovieCard from "../Cards/SimilarMovieCard";
 
 const PlayTV = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const ep = searchParams.get("ep");
+  const router = useRouter();
   const [videoURL, setVideoUrl] = useState<string>();
   const [tv, setTV] = useState<TVSeries>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
+  const [similarTV, setSimilarTV] = useState<Movie[]>([]);
   const movieListRef = useRef<HTMLDivElement>(null);
+  const [tvEpisodes, setTVEpisodes] = useState<TVSeason | null>(null);
+  const [episodeList, setEpisodeList] = useState<TVEpisode[]>([]);
   const [screenSize, setScreenSize] = useState({
     width: 0,
     height: 0,
   });
+
+  const handleNextEpisode = () => {
+    if (id && ep) {
+      const newEp = parseInt(ep) + 1;
+      router.push(
+        `/PlayTV?id=${encodeURIComponent(
+          id.toString()
+        )}&ep=${encodeURIComponent(newEp.toString())}`
+      );
+    }
+  };
+
+  const handlePrevEpisode = () => {
+    if (id && ep) {
+      const newEp = parseInt(ep) - 1;
+      router.push(
+        `/PlayTV?id=${encodeURIComponent(
+          id.toString()
+        )}&ep=${encodeURIComponent(newEp.toString())}`
+      );
+    }
+  };
+
+  const handleJumpToEpisode = (jumpTo: number) => {
+    if (id && ep) {
+      router.push(
+        `/PlayTV?id=${encodeURIComponent(
+          id.toString()
+        )}&ep=${encodeURIComponent(jumpTo.toString())}`
+      );
+    }
+  };
 
   const handleSlideContainer = (direction: "left" | "right") => {
     if (movieListRef.current) {
@@ -49,6 +86,7 @@ const PlayTV = () => {
       return () => window.removeEventListener("resize", updateScreenSize);
     }
   }, []);
+
   useEffect(() => {
     if (id) {
       const tvID = parseInt(id);
@@ -60,6 +98,9 @@ const PlayTV = () => {
           const movieData = await getTVSeriesDetails(tvID);
           setTV(movieData);
           console.log("Movie data: ", movieData);
+          const similarTVData = await getSimilarTV(tvID, 1);
+
+          setSimilarTV(similarTVData);
         } catch (error) {
           console.error("Error fetching movie data:", error);
         } finally {
@@ -69,7 +110,7 @@ const PlayTV = () => {
 
       fetchData();
     }
-  }, [id]);
+  }, [id, ep]);
 
   useEffect(() => {
     if (id && ep) {
@@ -77,7 +118,27 @@ const PlayTV = () => {
       const URLStreamBucket = `https://multiembed.mov/?video_id=${id}&tmdb=1&s=1&e=${ep}`;
       setVideoUrl(URLStreamBucket);
     }
-  }, [id]);
+  }, [id, ep]);
+
+  useEffect(() => {
+    if (id && tv) {
+      setIsLoading(true);
+
+      const fetchData = async () => {
+        try {
+          const tvData = await getTVEpisodes(tv.id, 1);
+          setTVEpisodes(tvData);
+          setEpisodeList(tvData.episodes);
+        } catch (error) {
+          console.error("Error fetching tv episodes data:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchData();
+    }
+  }, [id, tv, ep]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -87,13 +148,55 @@ const PlayTV = () => {
     <div className="play-movie-page-container min-h-screen w-full text-white flex flex-col items-center pt-32 font-Roboto">
       <div className="movie-player-container w-full h-100% flex justify-center items-center ">
         <iframe
-          className="w-[80%] h-[85vh] rounded-[3px] border-solid border-2 border-[#323232] lg:h-[70vh] md:h-[60vh] sm:h-[50vh]"
+          className="w-[80%] h-[80vh] rounded-[3px] border-solid border-2 border-[#323232] lg:h-[70vh] md:h-[60vh] sm:h-[50vh]"
           src={videoURL}
           title={tv?.original_name}
           frameBorder="0"
           allowFullScreen
           allow="autoplay; encrypted-media; "
         ></iframe>
+      </div>
+      <div className="prev-next-episode-button flex flex-row w-[80%] justify-between py-4">
+        {ep && parseInt(ep) !== 1 ? (
+          <button
+            onClick={() => handlePrevEpisode()}
+            className="py-3 px-10 bg-[#323232] hover:-translate-x-3 transition-all ease-in-out duration-400 rounded-[3px]"
+          >
+            <span>Prev Episode</span>
+          </button>
+        ) : (
+          <p></p>
+        )}
+        {ep && parseInt(ep) !== episodeList.length ? (
+          <button
+            onClick={() => handleNextEpisode()}
+            className="py-3 px-10 bg-[#323232] hover:translate-x-3 transition-all ease-in-out duration-400 rounded-[3px]"
+          >
+            <span>Next Episode</span>
+          </button>
+        ) : (
+          <p></p>
+        )}
+      </div>
+      <div className="tv-episode-list-container w-[80%] flex flex-row flex-wrap gap-2 p-7">
+        {tv && episodeList.length !== 0
+          ? episodeList.map((episode: TVEpisode) => (
+              <div
+                key={episode.id}
+                onClick={() => handleJumpToEpisode(episode.episode_number)}
+                className={`episode-list-container cursor-pointer w-[9%] p-4  rounded-[3px] group  ${
+                  ep && parseInt(ep) === episode.episode_number
+                    ? "bg-[#e4e4e4] text-black"
+                    : "bg-[#323232] text-white"
+                }`}
+              >
+                <p className=" group-hover:translate-x-3 font-medium  group-hover:font-bold  transition-all ease-in-out duration-400  h-[100%] w-[100%] m-0">
+                  {episode.episode_number}{" "}
+                  <span className="text-[#6b6b6b] text-xs">| Ep</span>
+                </p>
+              </div>
+            ))
+          : "No episodes"}
       </div>
       <div className="play-tv-bottom-content w-[80%] pt-8 pb-80 flex flex-row justify-between lg:flex-col">
         <div className="more-tv-details flex flex-row w-[60%] border-solid border-2 border-[#2f3031] bg-[#0f0f0f] p-3 justify-between rounded-[3px] lg:w-[100%] lg:gap-2 md:flex-col">
@@ -111,7 +214,7 @@ const PlayTV = () => {
           </div>
           <div className="right-detail w-[70%] flex flex-col gap-3 md:w-[100%] ">
             <h1 className="text-3xl font-bold font-Roboto md:text-center">
-              {tv?.original_name}
+              {tv?.name}
             </h1>
             <p className="flex flex-row gap-4 font-Roboto">
               <span className="font-Roboto">{tv?.vote_average}</span>{" "}
@@ -162,11 +265,11 @@ const PlayTV = () => {
               className="flex flex-row overflow-auto w-[100%] scrollbar-hide gap-3"
               ref={movieListRef}
             >
-              {similarMovies && similarMovies.length !== 0 ? (
-                similarMovies.map((movie: Movie) => (
-                  <div key={movie.id} className="">
+              {similarTV && similarTV.length !== 0 ? (
+                similarTV.map((tv: Movie) => (
+                  <div key={tv.id} className="">
                     {" "}
-                    <p>Simlar?</p>
+                    <SimilarMovieCard movie={tv} />
                   </div>
                 ))
               ) : (

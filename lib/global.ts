@@ -198,7 +198,7 @@ export const getPopularTV = async (page: number): Promise<Movie[]> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data.results);
+
     return data.results;
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -217,7 +217,7 @@ export const getTopRatedTV = async (page: number): Promise<Movie[]> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data.results);
+
     return data.results;
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -236,7 +236,6 @@ export const getAiringTodayTV = async (page: number): Promise<Movie[]> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data.results);
     return data.results;
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -277,9 +276,29 @@ export const getTVSeriesDetails = async (id: number): Promise<TVSeries> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
-
     return data;
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch movies: ${error.message}`);
+    } else {
+      throw console.log("Unknown Error");
+    }
+  }
+};
+
+export const getSimilarTV = async (
+  id: number,
+  page: number
+): Promise<Movie[]> => {
+  const URLForSimilarTV = `https://api.themoviedb.org/3/tv/${id}/similar?language=en-US&page=${page}`;
+  try {
+    const response = await fetch(URLForSimilarTV, Getoptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("similar tv: ", data.results);
+    return data.results;
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
       throw new Error(`Failed to fetch movies: ${error.message}`);

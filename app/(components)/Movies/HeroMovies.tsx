@@ -127,6 +127,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
             PlayButtonClass={PlayButtonClass}
             imgWidth={25}
             imgHeight={25}
+            epNumber="1"
           />
           <MoreInfoButton
             onClick={() => handleMoreInfoClick()}

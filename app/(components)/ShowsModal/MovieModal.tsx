@@ -2,6 +2,7 @@ import {
   getMovieByID,
   getShowVideos,
   getSimilarMovie,
+  getSimilarTV,
   getTVEpisodes,
   getTVSeriesDetails,
 } from "@/lib/global";
@@ -21,6 +22,7 @@ import React, { useEffect, useRef, useState } from "react";
 import PlayMovieButton from "../Buttons/PlayMovieButton";
 import SimilarMovieCard from "../Cards/SimilarMovieCard";
 import TVEpisodesCards from "../Cards/TVEpisodesCards";
+import SimilarTVCard from "../Cards/SimilarTVCard";
 
 interface MovieModalProps {
   show: boolean;
@@ -40,7 +42,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
   const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
-  const [isExtended, setIsExtended] = useState<boolean>(false);
+  const [isExtended, setIsExtended] = useState<boolean>(true);
 
   const PlayButtonClass =
     "px-10 py-2 bg-white w-[20%] text-black rounded-[5px] text-2xl font-bold flex flex-row items-center gap-3 hover:bg-[#ffffffc0] xl:px-6 xl:py-3 xl:text-xl lg:text-[16px]";
@@ -58,11 +60,14 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
           const movieData = await getMovieByID(movie.id);
           const res = JSON.parse(movieData);
           setMovie(res);
-          const similarMoviesData = await getSimilarMovie(movie.id);
-          const filteredSimilarData = similarMoviesData.filter(
-            (movie: Movie) => movie.poster_path !== null
-          );
-          setSimilarMovies(filteredSimilarData);
+
+          if (type === "movie") {
+            const similarMoviesData = await getSimilarMovie(movie.id);
+            const filteredSimilarData = similarMoviesData.filter(
+              (movie: Movie) => movie.poster_path !== null
+            );
+            setSimilarMovies(filteredSimilarData);
+          }
         } catch (error) {
           console.error("Error fetching movie data:", error);
         } finally {
@@ -72,8 +77,13 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
 
       const fetchTVData = async () => {
         try {
-          const tvData = await getTVSeriesDetails(movie.id);
-          setTV(tvData);
+          if (type === "tv") {
+            const tvData = await getTVSeriesDetails(movie.id);
+            setTV(tvData);
+
+            const similarTVData = await getSimilarTV(movie.id, 1);
+            setSimilarMovies(similarTVData);
+          }
         } catch (error) {
           console.error("Error fetching movie data:", error);
         } finally {
@@ -89,7 +99,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
         console.log("Invalid Type");
       }
     }
-  }, []);
+  }, [show, movie, type]);
 
   useEffect(() => {
     const handleGetMovieVideo = async (
@@ -259,6 +269,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
               </p>
             </div>
           </div>
+
           {/* TV SHOW EPISODES */}
           {type === "tv" ? (
             <div className="tv-episodes-list-container cursor-pointer">
@@ -303,10 +314,11 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
             ""
           )}
           {/* TV SHOW EPISODES */}
-          <div className="similar-movies-container w-[100%] flex flex-col gap-4">
+
+          <div className="similar-shows-container w-[100%] flex flex-col gap-4">
             <h1 className="font-semibold text-3xl">More Like This</h1>
-            <div className="similar-movie-card-container flex flex-row flex-wrap gap-3">
-              {" "}
+
+            <div className="similar-shows-card-container flex flex-row flex-wrap gap-3">
               {similarMovies
                 ? similarMovies.map((movie: Movie) => (
                     <SimilarMovieCard key={movie.id} movie={movie} />
@@ -314,7 +326,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
                 : "No similar Movies"}
             </div>
           </div>
-          <div className="about-movie w-[100%] pb-16 flex flex-col gap-5">
+          <div className="about-show w-[100%] pb-16 flex flex-col gap-5">
             <h1 className="text-2xl font-bold">
               <span className="font-medium text-xl">About</span>{" "}
               {type === "movie" ? currentMovie?.title : currentTV?.name}

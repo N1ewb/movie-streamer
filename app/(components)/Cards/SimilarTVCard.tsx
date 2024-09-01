@@ -1,19 +1,19 @@
-import { Movie } from "@/lib/types";
+import { TVSeries } from "@/lib/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-interface SimilarMovieCardProps {
-  movie: Movie;
+interface SimilarTVCardProps {
+  tv: TVSeries;
 }
 
-const SimilarMovieCard: React.FC<SimilarMovieCardProps> = ({ movie }) => {
+const SimilarTVCard: React.FC<SimilarTVCardProps> = ({ tv }) => {
   const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClickPlayMovie = () => {
-    if (movie?.id) {
-      router.push(`/PlayMovie?id=${encodeURIComponent(movie.id.toString())}`);
+    if (tv?.id) {
+      router.push(`/PlayTV?id=${encodeURIComponent(tv.id.toString())}`);
     } else {
       console.error("Movie ID is not defined.");
     }
@@ -25,15 +25,15 @@ const SimilarMovieCard: React.FC<SimilarMovieCardProps> = ({ movie }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {movie.poster_path ? (
+      {tv.poster_path ? (
         <div className="relative w-full cursor-pointer">
           <Image
             onClick={handleClickPlayMovie}
             className="object-cover rounded-md transition-all duration-300 ease-in-out transform hover:opacity-75"
-            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-            alt={movie?.original_title || "movie poster"}
-            height={240}
+            src={`https://image.tmdb.org/t/p/original${tv.poster_path}`}
+            alt={tv?.name || "movie poster"}
             width={160}
+            height={240}
           />
           {isHovered && (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -53,11 +53,9 @@ const SimilarMovieCard: React.FC<SimilarMovieCardProps> = ({ movie }) => {
           <p className="text-sm text-gray-400">No Image Available</p>
         </div>
       )}
-      <p className="text-sm truncate w-full">
-        {movie.title ? movie.title : movie.name}
-      </p>
+      <p className="text-sm truncate w-full">{tv.name}</p>
     </div>
   );
 };
 
-export default SimilarMovieCard;
+export default SimilarTVCard;
