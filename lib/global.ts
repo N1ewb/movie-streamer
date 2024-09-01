@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { Genres, Movie } from "./types";
+import { Genres, Movie, TVEpisode, TVSeason, TVSeries } from "./types";
 
 const Getoptions = {
   method: "GET",
@@ -111,8 +111,9 @@ export const searchMovie = async (
   }
 };
 
-export const getMovieVideos = async (id: number) => {
-  const URLForMovieVideos = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
+export const getShowVideos = async (id: number, type: "movie" | "tv") => {
+  const URLForMovieVideos = `https://api.themoviedb.org/3/${type}/${id}/videos?language=en-US`;
+
   try {
     const response = await fetch(URLForMovieVideos, Getoptions);
     if (!response.ok) {
@@ -160,6 +161,125 @@ export const getSimilarMovie = async (id: number) => {
     const data = await response.json();
 
     return data.results;
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch movies: ${error.message}`);
+    } else {
+      throw console.log("Unknown Error");
+    }
+  }
+};
+
+export const getFanArts = async (id: number) => {
+  const URLForFanArts = `https://webservice.fanart.tv/v3/movies/${id}?api_key=${`af332c8edca1f49d9e37b05de4af1e55`}`;
+
+  try {
+    const response = await fetch(URLForFanArts);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    return data.results;
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch movies: ${error.message}`);
+    } else {
+      throw console.log("Unknown Error");
+    }
+  }
+};
+
+export const getPopularTV = async (page: number): Promise<Movie[]> => {
+  const URLForTV = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+  try {
+    const response = await fetch(URLForTV, Getoptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data.results);
+    return data.results;
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch movies: ${error.message}`);
+    } else {
+      throw console.log("Unknown Error");
+    }
+  }
+};
+
+export const getTopRatedTV = async (page: number): Promise<Movie[]> => {
+  const URLForTV = `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`;
+  try {
+    const response = await fetch(URLForTV, Getoptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data.results);
+    return data.results;
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch movies: ${error.message}`);
+    } else {
+      throw console.log("Unknown Error");
+    }
+  }
+};
+
+export const getAiringTodayTV = async (page: number): Promise<Movie[]> => {
+  const URLForTV = `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${page}`;
+  try {
+    const response = await fetch(URLForTV, Getoptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data.results);
+    return data.results;
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch movies: ${error.message}`);
+    } else {
+      throw console.log("Unknown Error");
+    }
+  }
+};
+
+export const getTVEpisodes = async (
+  id: number,
+  season: number
+): Promise<TVSeason> => {
+  const URLForTV = `https://api.themoviedb.org/3/tv/${id}/season/${season}?language=en-US`;
+  try {
+    const response = await fetch(URLForTV, Getoptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Episodes", data);
+    return data;
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch movies: ${error.message}`);
+    } else {
+      throw console.log("Unknown Error");
+    }
+  }
+};
+
+export const getTVSeriesDetails = async (id: number): Promise<TVSeries> => {
+  const URLForTVSeries = `https://api.themoviedb.org/3/tv/${id}?language=en-US`;
+  try {
+    const response = await fetch(URLForTVSeries, Getoptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
+
+    return data;
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
       throw new Error(`Failed to fetch movies: ${error.message}`);

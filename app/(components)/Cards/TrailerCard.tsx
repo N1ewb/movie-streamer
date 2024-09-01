@@ -1,4 +1,4 @@
-import { getMovieVideos } from "@/lib/global";
+import { getShowVideos } from "@/lib/global";
 import { Movie, MovieVideo } from "@/lib/types";
 import React, { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ const TrailerCard = ({ movie, setIsHovered }: TrailerCardProps) => {
       setIsLoading(true);
       console.log(movie.id);
       try {
-        const movieVideos = await getMovieVideos(movieID);
+        const movieVideos = await getShowVideos(movieID, "movie");
         const filterTeasers = movieVideos.filter(
           (video: MovieVideo) =>
             video.type.includes("Teaser") || video.type.includes("Trailer")

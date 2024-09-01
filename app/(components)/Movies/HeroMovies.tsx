@@ -1,11 +1,11 @@
-import { getMovieVideos } from "@/lib/global";
+import { getShowVideos } from "@/lib/global";
 import { Movie, MovieVideo } from "@/lib/types";
 import React, { useEffect, useState } from "react";
 import { VolumeX, Volume2 } from "lucide-react";
 import Image from "next/image";
-import PlayMovieButton from "./Buttons/PlayMovieButton";
-import MoreInfoButton from "./Buttons/MoreInfoButton";
-import MovieModal from "./MovieModal/MovieModal";
+import PlayMovieButton from "../Buttons/PlayMovieButton";
+import MoreInfoButton from "../Buttons/MoreInfoButton";
+import MovieModal from "../ShowsModal/MovieModal";
 
 interface HeroMoviesProps {
   movie: Movie;
@@ -32,11 +32,14 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   };
 
   useEffect(() => {
-    const handleGetMovieVideo = async (movieID: number) => {
+    const handleGetMovieVideo = async (
+      movieID: number,
+      type: "movie" | "tv"
+    ) => {
       setIsLoading(true);
       console.log(movie.id);
       try {
-        const movieVideos = await getMovieVideos(movieID);
+        const movieVideos = await getShowVideos(movieID, type);
         const filterTeasers = movieVideos.filter(
           (video: MovieVideo) =>
             video.type.includes("Teaser") || video.type.includes("Trailer")
@@ -52,7 +55,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
         setIsLoading(false);
       }
     };
-    handleGetMovieVideo(movie.id);
+    handleGetMovieVideo(movie.id, "movie");
   }, [movie.id]);
 
   if (isLoading) {
@@ -119,7 +122,8 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
         </div>
         <div className="hero-movie-play-details flex flex-row gap-5">
           <PlayMovieButton
-            movie={movie}
+            type="movie"
+            show={movie}
             PlayButtonClass={PlayButtonClass}
             imgWidth={25}
             imgHeight={25}
@@ -133,6 +137,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
         </div>
       </div>
       <MovieModal
+        type="movie"
         show={showModal}
         onClose={() => setShowModal(false)}
         movie={movie}

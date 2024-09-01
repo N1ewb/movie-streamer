@@ -2,35 +2,35 @@
 import React, { useEffect } from "react";
 import { Movie } from "@/lib/types";
 import Image from "next/image";
-import PopularMovieCard from "@/app/(components)/Cards/PopularMovieCard";
+import PopularMovieCard from "../Cards/PopularShowCard";
 
-interface MovieListProps {
+interface TvListShowProps {
   handleSlideContainer: (direction: "left" | "right") => void;
-  movieListRef: React.RefObject<HTMLDivElement>;
+  tvListRef: React.RefObject<HTMLDivElement>;
   section: any;
-  movieList: Movie[];
-  setSelectedMovie: React.Dispatch<React.SetStateAction<Movie | undefined>>;
+  tvList: Movie[];
+  setSelectedTV: React.Dispatch<React.SetStateAction<Movie | undefined>>;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MovieList = ({
+const TvShowList = ({
   handleSlideContainer,
-  movieListRef,
+  tvListRef,
   section,
-  movieList,
-  setSelectedMovie,
+  tvList,
+  setSelectedTV,
   setShowModal,
-}: MovieListProps) => {
+}: TvListShowProps) => {
   useEffect(() => {
     section.fetch();
   }, []);
 
   return (
-    <div className="movies-list-container p-[45px] max-w-full text-white z-20  flex flex-col">
-      <div className="movies-list-header">
+    <div className="tv-list-container p-[45px] max-w-full text-white z-20  flex flex-col">
+      <div className="tv-list-header">
         <h1 className="font-semibold text-3xl">{section.header}</h1>
       </div>
-      <div className="popular-movies-content-container flex flex-row items-center justify-between p-[30px] w-full">
+      <div className="popular-tv-content-container flex flex-row items-center justify-between p-[30px] w-full">
         <button
           className="cursor-pointer"
           onClick={() => handleSlideContainer("left")}
@@ -45,14 +45,15 @@ const MovieList = ({
           />
         </button>
         <div
-          className="movie-list-container flex flex-row w-[95%] gap-3 overflow-auto scrollbar-hide"
-          ref={movieListRef}
+          className="tv-list-container flex flex-row w-[95%] gap-3 overflow-auto scrollbar-hide"
+          ref={tvListRef}
         >
-          {movieList.map((movie: Movie) => (
-            <div key={movie.id} className="flex movie-card-container">
+          {tvList.map((tv: Movie) => (
+            <div key={tv.id} className="flex tv-card-container">
               <PopularMovieCard
-                movie={movie}
-                setSelectedMovie={setSelectedMovie}
+                type="tv"
+                show={tv}
+                setSelectedShow={setSelectedTV}
                 setShowModal={setShowModal}
               />
             </div>
@@ -76,4 +77,4 @@ const MovieList = ({
   );
 };
 
-export default MovieList;
+export default TvShowList;

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { getMoviesByPopular } from "@/lib/global";
 import { Movie } from "@/lib/types";
-import HeroMovies from "@/app/(components)/HeroMovies";
+import HeroMovies from "@/app/(components)/Movies/HeroMovies";
 
 const Hero = () => {
   const [activeNumber, setActiveNumber] = useState(0);

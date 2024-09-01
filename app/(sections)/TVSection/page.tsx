@@ -1,56 +1,52 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  getMoviesByPopular,
-  getTopRatedMovies,
-  getUpcomingMovies,
-} from "@/lib/global";
+import { getAiringTodayTV, getPopularTV, getTopRatedTV } from "@/lib/global";
 import { Movie } from "@/lib/types";
-import MovieList from "@/app/(components)/Movies/MoviesStrip";
 import MovieModal from "@/app/(components)/ShowsModal/MovieModal";
+import TvShowList from "@/app/(components)/TVShows/TVShowList";
 
-const MovieSection: React.FC = () => {
+const TVSection: React.FC = () => {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
-  const [topRatedMovies, setTopRatedMovies] = useState<Movie[]>([]);
-  const [upcomingMovies, setUpcomingMovies] = useState<Movie[]>([]);
+  const [popularTV, setPopularTV] = useState<Movie[]>([]);
+  const [topRatedTV, setTopRatedTV] = useState<Movie[]>([]);
+  const [airingNowTV, setAiringNowTV] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Movie>();
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const fetchMovies = async (
+  const fetchTV = async (
     fetcher: (page: number) => Promise<Movie[]>,
-    setMovies: React.Dispatch<React.SetStateAction<Movie[]>>,
+    setTV: React.Dispatch<React.SetStateAction<Movie[]>>,
     page: number = 1
   ) => {
     try {
-      const movies = await fetcher(page);
-      setMovies(movies);
+      const TV = await fetcher(page);
+      setTV(TV);
     } catch (error) {
       console.error(
-        "Error fetching movies:",
+        "Error fetching TV:",
         error instanceof Error ? error.message : "Unknown error"
       );
     }
   };
 
-  const movieSections = [
+  const TVSections = [
     {
       header: "Popular Movies",
-      fetch: () => fetchMovies(getMoviesByPopular, setPopularMovies),
-      movies: popularMovies,
-      movieListRef: useRef<HTMLDivElement>(null),
+      fetch: () => fetchTV(getPopularTV, setPopularTV),
+      TV: popularTV,
+      tvListRef: useRef<HTMLDivElement>(null),
     },
     {
-      header: "Top Rated Movies",
-      fetch: () => fetchMovies(getTopRatedMovies, setTopRatedMovies),
-      movies: topRatedMovies,
-      movieListRef: useRef<HTMLDivElement>(null),
+      header: "Top Rated TV",
+      fetch: () => fetchTV(getTopRatedTV, setTopRatedTV),
+      TV: topRatedTV,
+      tvListRef: useRef<HTMLDivElement>(null),
     },
     {
-      header: "Upcoming Movies",
-      fetch: () => fetchMovies(getUpcomingMovies, setUpcomingMovies),
-      movies: upcomingMovies,
-      movieListRef: useRef<HTMLDivElement>(null),
+      header: "Airing Now TV",
+      fetch: () => fetchTV(getAiringTodayTV, setAiringNowTV),
+      TV: airingNowTV,
+      tvListRef: useRef<HTMLDivElement>(null),
     },
   ];
 
@@ -68,12 +64,12 @@ const MovieSection: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-between max-w-full md:top-72 sm:top-80 xsm:top-36  xxsm:top-10 xxxxsm:top-40 text-white">
-      {movieSections.map((section, index) => (
+      {TVSections.map((section, index) => (
         <div key={index} className="flex movie-list-page-container max-w-full">
-          <MovieList
+          <TvShowList
             handleSlideContainer={(direction) =>
-              section.movieListRef.current &&
-              section.movieListRef.current.scrollBy({
+              section.tvListRef.current &&
+              section.tvListRef.current.scrollBy({
                 left:
                   direction === "left"
                     ? -(screenSize.width - screenSize.width / 5.3)
@@ -81,17 +77,17 @@ const MovieSection: React.FC = () => {
                 behavior: "smooth",
               })
             }
-            movieListRef={section.movieListRef}
+            tvListRef={section.tvListRef}
             section={section}
-            movieList={section.movies}
-            setSelectedMovie={setSelectedMovie}
+            tvList={section.TV}
+            setSelectedTV={setSelectedMovie}
             setShowModal={setShowModal}
           />
         </div>
       ))}
       {selectedMovie && (
         <MovieModal
-          type="movie"
+          type="tv"
           show={showModal}
           onClose={() => setShowModal(false)}
           movie={selectedMovie}
@@ -101,4 +97,4 @@ const MovieSection: React.FC = () => {
   );
 };
 
-export default MovieSection;
+export default TVSection;

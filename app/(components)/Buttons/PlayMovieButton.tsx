@@ -7,7 +7,8 @@ interface PlayMovieButtonProps {
   PlayButtonClass: string;
   imgWidth: number;
   imgHeight: number;
-  movie: Movie;
+  show: Movie;
+  type: "movie" | "tv";
 }
 
 const PlayMovieButton = ({
@@ -15,13 +16,20 @@ const PlayMovieButton = ({
 
   imgWidth,
   imgHeight,
-  movie,
+  show,
+  type,
 }: PlayMovieButtonProps) => {
   const router = useRouter();
 
   const handleClickPlayMovie = () => {
-    if (movie?.id) {
-      router.push(`/PlayMovie?id=${encodeURIComponent(movie.id.toString())}`);
+    if (show?.id) {
+      if (type === "movie") {
+        router.push(`/PlayMovie?id=${encodeURIComponent(show.id.toString())}`);
+      } else if (type === "tv") {
+        router.push(`/PlayTV?id=${encodeURIComponent(show.id.toString())}`);
+      } else {
+        console.log("Invalid Type");
+      }
     } else {
       console.error("Movie ID is not defined.");
     }
