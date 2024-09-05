@@ -94,9 +94,16 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
         ></iframe>
         <button
           onClick={toggleMute}
-          className="absolute bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-40 bottom-[30%] right-[10%]"
+          className="absolute bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-40 bottom-[25%] right-[8%]  xsm:p-1"
         >
-          {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+          {isMuted ? (
+            <VolumeX
+              size={24}
+              className="h-[20px] w-[20px] sm:h-[15px] sm:w-[15px] sxm:h-[13px] xsm:w-[13px] "
+            />
+          ) : (
+            <Volume2 size={24} />
+          )}
         </button>
       </div>
       <div className="hero-movie-details-container w-full flex flex-col z-20 gap-10 mt-[18%] mb-[8%] px-10 md:gap-5 xsm:gap-1 xsm:mt-[16%]">

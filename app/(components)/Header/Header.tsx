@@ -85,8 +85,8 @@ const Header = () => {
               className="cursor-pointer xl:w-[150px] xl:h-[auto]"
               src="/crispyroll.png"
               alt="logo"
-              height={100}
-              width={200}
+              width={170}
+              height={80}
               priority
             />
           </div>

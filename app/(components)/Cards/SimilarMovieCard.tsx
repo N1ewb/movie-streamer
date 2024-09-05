@@ -31,7 +31,7 @@ const SimilarMovieCard: React.FC<SimilarMovieCardProps> = ({ movie }) => {
 
   return (
     <div
-      className="relative text-white w-[160px] md:w-[180px] lg:w-[200px] xl:w-[220px] flex flex-col items-center justify-start gap-2 p-2 bg-[#141414] rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-opacity-80"
+      className="relative text-white w-[160px] md:w-[180px] lg:w-[200px] xl:w-[220px] ] flex flex-col items-center justify-start gap-2 p-2 bg-[#141414] rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-opacity-80"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -179,6 +179,18 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
     }
   }, [contentHeight]);
 
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [show]);
+
   if (!show) return null;
 
   if (isLoading) {
@@ -187,11 +199,11 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
 
   return (
     <div
-      className="absolute min-h-screen w-full top-0 left-0 bg-[#000000cc] bg-opacity-75 flex items-center justify-center pt-[50px] z-[99] rounded-md"
+      className="absolute max-h-screen w-full left-0 bg-[#000000cc] bg-opacity-75 flex  justify-center pt-[50px] z-[99] rounded-[20px] overflow-auto"
       ref={modalRef}
     >
-      <div className="modal-content-container bg-[#141414] relative  w-[50%] 2xl:w-[70%] 1xl:w-[75%] lg:w-[80%] md:w-[90%]  min-h-screen shadow-lg  xsm:w-full rounded-md">
-        <div className="modal-header w-[100%] flex flex-row-reverse absolute right-3 z-30">
+      <div className="modal-content-container  h-fit bg-[#141414] relative  w-[50%] 2xl:w-[70%] 1xl:w-[75%] lg:w-[80%] md:w-[90%]  min-h-screen shadow-lg  xsm:w-full rounded-md">
+        <div className="modal-header w-[100%] flex flex-row-reverse absolute top-2 right-3 z-30">
           <button
             onClick={onClose}
             className="rounded-full outline-2 bg-[#0000006b] p-2"
@@ -392,9 +404,6 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
             </p>
           </div>
         </div>
-        <div
-          className={`${episodeList.length < 5 ? "h-[130vh]" : "h-0"}`}
-        ></div>
       </div>
     </div>
   );
