@@ -32,7 +32,7 @@ const TvShowList = ({
           {section.header}
         </h1>
       </div>
-      <div className="popular-tv-content-container flex flex-row items-center justify-between w-full">
+      <div className="tv-content-container py-2 flex flex-row items-center justify-between w-full">
         <button
           className="cursor-pointer"
           onClick={() => handleSlideContainer("left")}

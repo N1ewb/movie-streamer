@@ -14,7 +14,7 @@ const Header = () => {
   const navLinks = [
     {
       tag: "Browse",
-      link: "#",
+      link: "/BrowsePage",
     },
     {
       tag: "News",
@@ -72,7 +72,7 @@ const Header = () => {
     >
       <div className="logo-container ">
         <Link href="/">
-          <div className=" flex flex-row items-center gap-3">
+          <div className=" flex flex-row items-center gap-3 [&_img]:w-[auto] xl:[&_img]:h-[40px]  lg:[&_img]:h-[35px] md:[&_img]:h-[30px] sm:[&_img]:h-[25px] xsm:[&_img]:h-[20px] xxsm:[&_img]:h-[15px]">
             <Image
               className="roll-img cursor-pointer xl:w-[30] xl:h-[auto]"
               src="/ROLL.png"
@@ -105,13 +105,13 @@ const Header = () => {
             {navLink.tag}
           </Link>
         ))}
-        <div className=" flex flex-row-reverse items-center w-[40%]">
+        <div className=" flex flex-row-reverse items-center w-[40%] [&_img]:w-[auto] sm:[&_img]:h-[20px] xsm:[&_img]:h-[15px]">
           <Image
             onClick={() => handleSearchClick()}
             src="/search-white.png"
             alt="Search"
-            width={25}
             height={25}
+            width={25}
             className={`cursor-pointer
       hover:-translate-x-1 transition-all duration-300 ease-in-out sm:hidden ${
         searchClicked ? "hidden" : "block"

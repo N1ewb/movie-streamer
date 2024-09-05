@@ -67,7 +67,7 @@ const MovieSection: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-between max-w-full  text-white z-50 xsm:mt-[45%]">
+    <div className="flex flex-col items-center justify-between max-w-full gap-5 text-white z-50 xsm:mt-[45%] xxxxsm:mt-[50%]">
       {movieSections.map((section, index) => (
         <div key={index} className="flex movie-list-page-container max-w-full">
           <MovieList

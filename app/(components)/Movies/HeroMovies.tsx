@@ -99,9 +99,9 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
       </div>
-      <div className="hero-movie-details-container w-full flex flex-col z-20 gap-10 mt-[18%] mb-[1%] px-10 md:gap-5 xsm:gap-1 xsm:mt-[16%]">
+      <div className="hero-movie-details-container w-full flex flex-col z-20 gap-10 mt-[18%] mb-[8%] px-10 md:gap-5 xsm:gap-1 xsm:mt-[16%]">
         <div className="hero-movie-title flex flex-col xsm:p-3 r w-[50%] lg:w-[80%] xsm:w-[100%] ">
-          <h1 className="font-extrabold w-[50%] text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl md:text-[36px] sm:text-[30px] xsm:text-[27px] xxsm:text-[23px] xxxsm:text-[19px]">
+          <h1 className="font-extrabold w-[60%] text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl md:text-[36px] sm:text-[30px] xsm:text-[27px] xxsm:text-[23px] xxxsm:text-[19px]">
             {movie.original_title}
           </h1>
           <p className="xl:text-[14px]  flex flex-row xsm:w-[100%]">

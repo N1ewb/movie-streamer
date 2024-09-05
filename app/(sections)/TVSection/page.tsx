@@ -64,7 +64,7 @@ const TVSection: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col  max-w-full text-white">
+    <div className="flex flex-col gap-5 max-w-full text-white mt-5">
       {TVSections.map((section, index) => (
         <div key={index} className="flex movie-list-page-container max-w-full">
           <TvShowList
