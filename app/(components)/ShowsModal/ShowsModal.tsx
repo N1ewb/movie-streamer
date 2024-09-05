@@ -128,7 +128,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
       }
     };
     handleGetMovieVideo(movie.id, type);
-  }, [movie.id, type]);
+  }, [movie.id, type, movie]);
 
   useEffect(() => {
     if (show && movie && type === "tv") {
@@ -148,7 +148,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
 
       fetchData();
     }
-  }, [show, type]);
+  }, [show, type, movie]);
 
   useEffect(() => {
     if (show && modalRef.current && !isLoading) {
