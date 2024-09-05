@@ -30,7 +30,7 @@ const PlayTV = () => {
     if (id && ep) {
       const newEp = parseInt(ep) + 1;
       router.push(
-        `/PlayTV?id=${encodeURIComponent(
+        `/PlayTVPage?id=${encodeURIComponent(
           id.toString()
         )}&ep=${encodeURIComponent(newEp.toString())}`
       );
@@ -41,7 +41,7 @@ const PlayTV = () => {
     if (id && ep) {
       const newEp = parseInt(ep) - 1;
       router.push(
-        `/PlayTV?id=${encodeURIComponent(
+        `/PlayTVPage?id=${encodeURIComponent(
           id.toString()
         )}&ep=${encodeURIComponent(newEp.toString())}`
       );
@@ -51,7 +51,7 @@ const PlayTV = () => {
   const handleJumpToEpisode = (jumpTo: number) => {
     if (id && ep) {
       router.push(
-        `/PlayTV?id=${encodeURIComponent(
+        `/PlayTVPage?id=${encodeURIComponent(
           id.toString()
         )}&ep=${encodeURIComponent(jumpTo.toString())}`
       );

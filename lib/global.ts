@@ -92,21 +92,35 @@ export const searchMovie = async (
   page: number,
   query: string
 ): Promise<Movie[]> => {
-  const URLForTopRated = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`;
+  const URLForSearchMovie = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`;
+  const URLForSearchTV = `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=${page}`;
 
   try {
-    const response = await fetch(URLForTopRated, Getoptions);
+    let response = await fetch(URLForSearchMovie, Getoptions);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json();
 
-    return data.results;
-  } catch (err: Error | unknown) {
+    let data = await response.json();
+
+    let results = data.results.map((item: any) => ({ ...item, type: "movie" }));
+
+    if (!results.length) {
+      response = await fetch(URLForSearchTV, Getoptions);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      data = await response.json();
+
+      results = data.results.map((item: any) => ({ ...item, type: "tv" }));
+    }
+
+    return results;
+  } catch (err: unknown) {
     if (err instanceof Error) {
-      throw new Error(`Failed to fetch movies: ${err.message}`);
+      throw new Error(`Failed to fetch movies or TV shows: ${err.message}`);
     } else {
-      throw console.log("Unknown Error");
+      throw new Error("Unknown error occurred.");
     }
   }
 };
@@ -160,12 +174,17 @@ export const getSimilarMovie = async (id: number) => {
     }
     const data = await response.json();
 
-    return data.results;
-  } catch (error: Error | unknown) {
+    const resultsWithTag = data.results.map((item: any) => ({
+      ...item,
+      type: "movie",
+    }));
+
+    return resultsWithTag;
+  } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(`Failed to fetch movies: ${error.message}`);
     } else {
-      throw console.log("Unknown Error");
+      throw new Error("Unknown error occurred.");
     }
   }
 };

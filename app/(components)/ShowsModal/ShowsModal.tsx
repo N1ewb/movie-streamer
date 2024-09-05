@@ -22,20 +22,19 @@ import React, { useEffect, useRef, useState } from "react";
 import PlayMovieButton from "../Buttons/PlayMovieButton";
 import SimilarMovieCard from "../Cards/SimilarMovieCard";
 import TVEpisodesCards from "../Cards/TVEpisodesCards";
-import SimilarTVCard from "../Cards/SimilarTVCard";
 
-interface MovieModalProps {
+interface ShowsModalProps {
   show: boolean;
   type: "movie" | "tv";
   onClose: () => void;
   movie: Movie;
 }
 
-const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
+const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const [movieVideos, setMovieVideos] = useState<MovieVideo[]>([]);
-  const [tvEpisodes, setTVEpisodes] = useState<TVSeason | null>(null);
+  const [TVSeasons, setTVSeasons] = useState<TVSeason | null>(null);
   const [episodeList, setEpisodeList] = useState<TVEpisode[]>([]);
   const [currentMovie, setMovie] = useState<MovieDetail>();
   const [currentTV, setTV] = useState<TVSeries>();
@@ -43,9 +42,10 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isExtended, setIsExtended] = useState<boolean>(true);
+  const [contentHeight, setContentHeight] = useState(0);
 
   const PlayButtonClass =
-    "px-10 py-2 bg-white w-[20%] text-black rounded-[5px] text-2xl font-bold flex flex-row items-center gap-3 hover:bg-[#ffffffc0] xl:px-6 xl:py-3 xl:text-xl lg:text-[16px]";
+    "px-10 py-2 bg-white w-[20%] text-black rounded-[5px] text-2xl font-bold flex flex-row items-center gap-3 hover:bg-[#ffffffc0] xl:px-6 xl:py-3 xl:text-xl lg:text-[16px] lg:[&_img]:w-[25px] lg:[&_img]:h-[25px] md:[&_img]:w-[20px] md:[&_img]:h-[20px] md:w-[25%] xsm:px-4 xsm:w-[35%] xxsm:w-[40%] xxxxsm:w-[45%]";
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -137,7 +137,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
       const fetchData = async () => {
         try {
           const tvData = await getTVEpisodes(movie.id, 1);
-          setTVEpisodes(tvData);
+          setTVSeasons(tvData);
           setEpisodeList(tvData.episodes);
         } catch (error) {
           console.error("Error fetching tv episodes data:", error);
@@ -162,6 +162,23 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
     }
   }, [isExtended]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const updateContentHeight = () => {
+        setContentHeight(document.documentElement.scrollHeight);
+      };
+
+      updateContentHeight();
+
+      window.addEventListener("resize", updateContentHeight);
+
+      return () => window.removeEventListener("resize", updateContentHeight);
+    }
+    if (contentHeight) {
+      console.log("content height", contentHeight);
+    }
+  }, [contentHeight, window]);
+
   if (!show) return null;
 
   if (isLoading) {
@@ -170,10 +187,10 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
 
   return (
     <div
-      className="absolute min-h-screen w-full top-0 left-0 bg-[#000000cc] bg-opacity-75 flex items-center justify-center pt-[50px] z-[99] "
+      className="absolute min-h-screen w-full top-0 left-0 bg-[#000000cc] bg-opacity-75 flex items-center justify-center pt-[50px] z-[99] rounded-md"
       ref={modalRef}
     >
-      <div className="modal-content-container bg-[#141414] relative rounded-[5px] w-[50%] min-h-screen shadow-lg ">
+      <div className="modal-content-container bg-[#141414] relative  w-[50%] 2xl:w-[70%] 1xl:w-[75%] lg:w-[80%] md:w-[90%]  min-h-screen shadow-lg  xsm:w-full rounded-md">
         <div className="modal-header w-[100%] flex flex-row-reverse absolute right-3 z-30">
           <button
             onClick={onClose}
@@ -216,7 +233,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
           )}
           <button
             onClick={toggleMute}
-            className="absolute bottom-[110px] right-[30px] bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-50 1xl:bottom-[%] 1xl:right-[100px] lg:bottom-[150px]"
+            className="absolute bottom-[110px] right-[30px] bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-50 1xl:bottom-[%] 1xl:right-[100px] lg:bottom-[150px] md:bottom-[50px] md:right-[60px] sm:bottom-[30px] xsm:bottom-[10px]"
           >
             {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
           </button>
@@ -230,7 +247,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
             show={movie}
             epNumber={"1"}
           />
-          <div className="div flex flex-row flex-wrap gap-4 w-[20%]">
+          <div className="div flex flex-row flex-wrap gap-4 w-[20%] md:w-[80%]">
             <p>
               {type === "movie"
                 ? currentMovie?.release_date
@@ -244,16 +261,16 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
             </p>
             <p>Language: {currentMovie?.original_language}</p>
           </div>
-          <div className="div w-[100%] flex flex-row">
-            <div className="div w-[70%]">
+          <div className="div w-[100%] flex flex-row md:flex-col md:gap-5">
+            <div className="div w-[70%] md:w-[90%]">
               <p>
                 {type === "movie"
                   ? currentMovie?.overview
                   : currentTV?.overview}
               </p>
             </div>
-            <div className="div w-[30%]">
-              <div className="genres-container flex flex-row flex-wrap gap-2">
+            <div className="div w-[30%] md:w-full">
+              <div className="genres-container flex flex-row flex-wrap gap-2 md:w-[90%]">
                 <span className="text-[#646464]">Genres: </span>
                 {type === "movie"
                   ? currentMovie?.genres.map((genre: Genre) => (
@@ -295,7 +312,7 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
                   <p>No Episodes Available</p>
                 )}
               </div>
-              {tvEpisodes && tvEpisodes?.episodes.length > 9 ? (
+              {episodeList && episodeList.length > 9 ? (
                 <div className="extend-button-container flex flex-row w-[100%] justify-center">
                   <button onClick={() => setIsExtended(!isExtended)}>
                     <Image
@@ -375,9 +392,12 @@ const MovieModal = ({ show, onClose, movie, type }: MovieModalProps) => {
             </p>
           </div>
         </div>
+        <div
+          className={`${episodeList.length < 5 ? "h-[130vh]" : "h-0"}`}
+        ></div>
       </div>
     </div>
   );
 };
 
-export default MovieModal;
+export default ShowsModal;

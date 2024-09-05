@@ -5,7 +5,7 @@ import { VolumeX, Volume2 } from "lucide-react";
 import Image from "next/image";
 import PlayMovieButton from "../Buttons/PlayMovieButton";
 import MoreInfoButton from "../Buttons/MoreInfoButton";
-import MovieModal from "../ShowsModal/MovieModal";
+import MovieModal from "../ShowsModal/ShowsModal";
 
 interface HeroMoviesProps {
   movie: Movie;
@@ -63,10 +63,10 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   }
 
   return (
-    <div className="relative h-[100vh] w-full xl:h-[80vh] xsm:absolute flex justify-center">
-      <div className="xsm-bg absolute -top-[11%] hidden md:flex w-[85%] h-screen z-30 xxxxsm:h-[60vh]">
+    <div className=" h-[100vh] w-full xl:h-[80vh] xsm:absolute flex justify-center">
+      <div className="xsm-bg relative -top-[11%] hidden md:flex w-[85%] h-screen z-20 xxxxsm:h-[60vh]">
         <Image
-          className="rounded-sm border-solid border-2 border-[#323232] absolute w-[100%] h-[auto] "
+          className="rounded-sm border-solid border-2 border-[#323232] absolute w-[100%] h-[auto] z-10"
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
           alt={`${movie.original_title}-poster`}
           width={430}
@@ -103,12 +103,12 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
         ></iframe>
         <button
           onClick={toggleMute}
-          className="absolute bottom-[280px] right-[120px] bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-50 1xl:bottom-[%] 1xl:right-[100px] lg:bottom-[150px]"
+          className="absolute bottom-[280px] right-[120px] bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-40 1xl:bottom-[%] 1xl:right-[100px] lg:bottom-[150px]"
         >
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
       </div>
-      <div className="hero-movie-detials-container flex flex-col absolute top-[20%] z-30  left-10 w-[40%] h-[51%] justify-evenly lg:w-[50%] md:w-[100%] md:left-0 md:items-center md:bg-gradient-to-t md:from-black md:via-[#000000d7] md:to-transparent md:top-[73%] sm:top-[60%] xsm:top-[37%] xxsm:top-[22%] xxxxsm:top-[43%]">
+      <div className="hero-movie-details-container flex flex-col absolute top-80 z-20 gap-10  left-10 w-[40%] h-[45vh]  lg:w-[50%] md:w-[100%] md:left-0 md:items-center md:bg-gradient-to-t md:from-black md:via-[#000000d7] md:to-transparent md:top-[20%] sm:top-[20%] xsm:top-[45%] xxsm:top-[21%]  xxxxsm:top-[20%] ">
         <div className="hero-movie-title flex flex-col xsm:p-3 xsm:justify-center w-[100%] ">
           <h1 className="font-extrabold text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl xsm:text-4xl md:text-center xxxxsm:text-3xl">
             {movie.original_title}

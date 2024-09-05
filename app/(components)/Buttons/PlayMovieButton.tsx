@@ -26,10 +26,12 @@ const PlayMovieButton = ({
   const handleClickPlayMovie = () => {
     if (show?.id) {
       if (type === "movie") {
-        router.push(`/PlayMovie?id=${encodeURIComponent(show.id.toString())}`);
+        router.push(
+          `/PlayMoviePage?id=${encodeURIComponent(show.id.toString())}`
+        );
       } else if (type === "tv") {
         router.push(
-          `/PlayTV?id=${encodeURIComponent(
+          `/PlayTVPage?id=${encodeURIComponent(
             show.id.toString()
           )}&ep=${encodeURIComponent(epNumber)}`
         );

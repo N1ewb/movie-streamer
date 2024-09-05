@@ -4,14 +4,14 @@ import { Movie } from "@/lib/types";
 import PlayMovieButton from "../Buttons/PlayMovieButton";
 import MoreInfoButton from "../Buttons/MoreInfoButton";
 
-interface MovieCardProps {
+interface ShowCardProps {
   show: Movie;
   type: "movie" | "tv";
   setSelectedShow: React.Dispatch<React.SetStateAction<Movie | undefined>>;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PopularMovieCard: React.FC<MovieCardProps> = ({
+const ShowCards: React.FC<ShowCardProps> = ({
   show,
   type,
   setSelectedShow,
@@ -20,9 +20,9 @@ const PopularMovieCard: React.FC<MovieCardProps> = ({
   const [isHovered, setIsHovered] = useState(false);
 
   const PlayButtonClass =
-    "bg-white py-1 px-4 rounded-[3px] text-black hover:bg-[#ffffffc0] flex flex-row gap-2 items-center";
+    "bg-white py-1 px-4 rounded-[3px] text-black hover:bg-[#ffffffc0] flex flex-row gap-2 items-center md:[&_img]:w-[15px] md:[&_img]:h-[15px]";
   const MoreInfoClass =
-    "bg-[#7575757a] py-1 px-4 rounded-[3px] text-white hover:bg-[#75757544] flex flex-row gap-2 items-center";
+    "bg-[#7575757a] py-1 px-4 rounded-[3px] text-white hover:bg-[#75757544] flex flex-row gap-2 items-center md:[&_img]:w-[15px] md:[&_img]:h-[15px]";
 
   const handleMoreInfoClick = () => {
     setSelectedShow(show);
@@ -87,4 +87,4 @@ const PopularMovieCard: React.FC<MovieCardProps> = ({
   );
 };
 
-export default PopularMovieCard;
+export default ShowCards;

@@ -2,8 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getAiringTodayTV, getPopularTV, getTopRatedTV } from "@/lib/global";
 import { Movie } from "@/lib/types";
-import MovieModal from "@/app/(components)/ShowsModal/MovieModal";
+
 import TvShowList from "@/app/(components)/TVShows/TVShowList";
+import ShowsModal from "@/app/(components)/ShowsModal/ShowsModal";
 
 const TVSection: React.FC = () => {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -31,21 +32,21 @@ const TVSection: React.FC = () => {
 
   const TVSections = [
     {
-      header: "Popular Movies",
+      header: "Airing Now TV Shows",
+      fetch: () => fetchTV(getAiringTodayTV, setAiringNowTV),
+      TV: airingNowTV,
+      tvListRef: useRef<HTMLDivElement>(null),
+    },
+    {
+      header: "Popular TV Shows",
       fetch: () => fetchTV(getPopularTV, setPopularTV),
       TV: popularTV,
       tvListRef: useRef<HTMLDivElement>(null),
     },
     {
-      header: "Top Rated TV",
+      header: "Top Rated TV Shows",
       fetch: () => fetchTV(getTopRatedTV, setTopRatedTV),
       TV: topRatedTV,
-      tvListRef: useRef<HTMLDivElement>(null),
-    },
-    {
-      header: "Airing Now TV",
-      fetch: () => fetchTV(getAiringTodayTV, setAiringNowTV),
-      TV: airingNowTV,
       tvListRef: useRef<HTMLDivElement>(null),
     },
   ];
@@ -63,7 +64,7 @@ const TVSection: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-between max-w-full md:top-72 sm:top-80 xsm:top-36  xxsm:top-10 xxxxsm:top-40 text-white">
+    <div className="flex flex-col  max-w-full text-white">
       {TVSections.map((section, index) => (
         <div key={index} className="flex movie-list-page-container max-w-full">
           <TvShowList
@@ -86,7 +87,7 @@ const TVSection: React.FC = () => {
         </div>
       ))}
       {selectedMovie && (
-        <MovieModal
+        <ShowsModal
           type="tv"
           show={showModal}
           onClose={() => setShowModal(false)}

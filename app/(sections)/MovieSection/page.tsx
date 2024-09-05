@@ -7,7 +7,7 @@ import {
 } from "@/lib/global";
 import { Movie } from "@/lib/types";
 import MovieList from "@/app/(components)/Movies/MoviesStrip";
-import MovieModal from "@/app/(components)/ShowsModal/MovieModal";
+import ShowsModal from "@/app/(components)/ShowsModal/ShowsModal";
 
 const MovieSection: React.FC = () => {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -67,7 +67,7 @@ const MovieSection: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-between max-w-full md:top-72 sm:top-80 xsm:top-36  xxsm:top-10 xxxxsm:top-40 text-white">
+    <div className="flex flex-col items-center justify-between max-w-full md:mt-96 sm:mt-80 xsm:mt-36  xxsm:mt-10 xxxxsm:mt-10 text-white z-50">
       {movieSections.map((section, index) => (
         <div key={index} className="flex movie-list-page-container max-w-full">
           <MovieList
@@ -90,7 +90,7 @@ const MovieSection: React.FC = () => {
         </div>
       ))}
       {selectedMovie && (
-        <MovieModal
+        <ShowsModal
           type="movie"
           show={showModal}
           onClose={() => setShowModal(false)}

@@ -9,6 +9,27 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [searchClicked, setSearchClicked] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
+  const [showDropdown, setShowDropDown] = useState<boolean>(false);
+
+  const navLinks = [
+    {
+      tag: "Browse",
+      link: "#",
+    },
+    {
+      tag: "News",
+      link: "/NewsPage",
+    },
+    {
+      tag: "Search Movies",
+      link: "/SearchPage",
+    },
+  ];
+
+  const handleShowDropdown = () => {
+    console.log(showDropdown);
+    setShowDropDown(!showDropdown);
+  };
 
   const handleSearchClick = () => {
     setSearchClicked(!searchClicked);
@@ -71,62 +92,67 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      <div className="nav-links flex flex-row justify-between w-[33%] align-middle items-center md:hidden">
-        <Link
-          className="m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out"
-          href="#"
-        >
-          Browse
-        </Link>
-        <Link
-          className="m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out"
-          href="#"
-        >
-          News
-        </Link>
-        <Link
-          className="m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out"
-          href="/SearchPage"
-        >
-          Search Movies
-        </Link>
-      </div>
-      <div className="flex flex-row-reverse w-[33%] items-center">
-        <div className="div  flex flex-row-reverse justify-between w-[30%] items-center md:w-[60%] ">
-          <Image
-            src="/default-avatar.png"
-            alt="default-profile"
-            height={50}
-            width={50}
-            className="cursor-pointer hover:-translate-x-1 transition-all duration-300 ease-in-out "
-          />
 
-          <div className="relative flex flex-row-reverse items-center">
-            <Image
-              onClick={() => handleSearchClick()}
-              src="/search-white.png"
-              alt="Search"
-              width={25}
-              height={25}
-              className={`cursor-pointer hover:-translate-x-1 transition-all duration-300 ease-in-out sm:hidden ${
-                searchClicked ? "hidden" : "block"
-              }`}
-            />
-            <input
-              name="search"
-              type="text"
-              placeholder="Search "
-              className={`absolute right-0 transition-all duration-500 ease-in-out text-black sm:opacity-100 sm:w-[150px] sm:pl-3 ${
-                searchClicked
-                  ? "w-[200px] opacity-100 pl-3"
-                  : "w-0 opacity-0 pl-0"
-              }`}
-              onBlur={() => handleSearchClick()}
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
-          </div>
+      <div className="nav-links flex flex-row justify-around w-[70%] align-middle items-center md:hidden md:w-0 ">
+        {navLinks.map((navLink) => (
+          <Link
+            className={`m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out ${
+              navLink.tag === "Search Movies" ? "hidden" : ""
+            }`}
+            href={navLink.link}
+          >
+            {navLink.tag}
+          </Link>
+        ))}
+        <div className="relative flex flex-row-reverse items-center w-[40%]">
+          <Image
+            onClick={() => handleSearchClick()}
+            src="/search-white.png"
+            alt="Search"
+            width={25}
+            height={25}
+            className={`cursor-pointer
+      hover:-translate-x-1 transition-all duration-300 ease-in-out sm:hidden ${
+        searchClicked ? "hidden" : "block"
+      }`}
+          />{" "}
+          <input
+            name="search"
+            type="text"
+            placeholder="Search "
+            className={`absolute right-0 transition-all
+      duration-500 ease-in-out text-black sm:opacity-100 sm:w-[150px] sm:pl-3 ${
+        searchClicked ? "w-[200px] opacity-100 pl-3" : "w-0 opacity-0 pl-0"
+      }`}
+            onBlur={() => handleSearchClick()}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
         </div>
+      </div>
+
+      <div
+        className={` flex flex-col absolute opacity-0  left-0 top-20 bg-black  gap-5 justify-between items-center py-10 w-full text-white z-50 transition-all ease-in-out duration-500 ${
+          showDropdown ? "md:opacity-100" : ""
+        } `}
+      >
+        {navLinks.map((navLink) => (
+          <Link
+            className="m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out z-50"
+            href={navLink.link}
+          >
+            {navLink.tag}
+          </Link>
+        ))}
+      </div>
+      <div className="burger hidden md:flex z-10">
+        <Image
+          onClick={() => handleShowDropdown()}
+          src="/menu.png"
+          alt="menu"
+          width={45}
+          height={45}
+        />
       </div>
     </div>
   );

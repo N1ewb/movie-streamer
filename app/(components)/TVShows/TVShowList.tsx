@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Movie } from "@/lib/types";
 import Image from "next/image";
-import PopularMovieCard from "../Cards/PopularShowCard";
+import PopularMovieCard from "../Cards/ShowCards";
 
 interface TvListShowProps {
   handleSlideContainer: (direction: "left" | "right") => void;
