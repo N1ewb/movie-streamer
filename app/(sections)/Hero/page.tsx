@@ -42,7 +42,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="hero-page-container text-white flex flex-row items-center h-[75vh] w-full ">
+    <div className="hero-page-container text-white flex flex-row   w-full ">
       {isLoading ? (
         <p>Loading...</p>
       ) : (

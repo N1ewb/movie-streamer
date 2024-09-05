@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Movie } from "@/lib/types";
 import Image from "next/image";
-import PopularMovieCard from "../Cards/ShowCards";
+import ShowsCards from "../Cards/ShowCards";
 
 interface TvListShowProps {
   handleSlideContainer: (direction: "left" | "right") => void;
@@ -26,11 +26,13 @@ const TvShowList = ({
   }, []);
 
   return (
-    <div className="tv-list-container p-[45px] max-w-full text-white z-20  flex flex-col">
+    <div className="tv-list-container px-[45px] max-w-full text-white z-20  flex flex-col lg:px-[35px] md:px-[25px]">
       <div className="tv-list-header">
-        <h1 className="font-semibold text-3xl">{section.header}</h1>
+        <h1 className="font-semibold text-3xl lg:text-[25px] md:text-xl text-[#d4d4d4] sm:text-[16px] xsm:text-sm">
+          {section.header}
+        </h1>
       </div>
-      <div className="popular-tv-content-container flex flex-row items-center justify-between p-[30px] w-full">
+      <div className="popular-tv-content-container flex flex-row items-center justify-between w-full">
         <button
           className="cursor-pointer"
           onClick={() => handleSlideContainer("left")}
@@ -50,7 +52,7 @@ const TvShowList = ({
         >
           {tvList.map((tv: Movie) => (
             <div key={tv.id} className="flex tv-card-container">
-              <PopularMovieCard
+              <ShowsCards
                 type="tv"
                 show={tv}
                 setSelectedShow={setSelectedTV}

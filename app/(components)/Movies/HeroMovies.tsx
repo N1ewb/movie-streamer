@@ -18,9 +18,9 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const PlayButtonClass =
-    "px-8 py-4 bg-white text-black rounded-[7px] text-2xl font-bold flex flex-row items-center gap-1 hover:bg-[#ffffffc0] xl:px-6 xl:py-3 xl:text-xl lg:text-[16px]";
+    "px-8 py-4 bg-white text-black rounded-[7px] text-2xl font-bold flex flex-row items-center gap-1 hover:bg-[#ffffffc0] xl:px-6 xl:py-3 xl:text-xl lg:text-[13px] lg:[&_img]:w-[20px] lg:[&_img]:h-[20px] lg:py-1  sm:[&_img]:w-[15px] sm:[&_img]:h-[15px] sm:py-0";
   const MoreInfoButtonClass =
-    "px-8 py-4 bg-[#7575757a] text-white rounded-[7px] text-2xl font-semibold flex flex-row items-center gap-1 hover:bg-[#75757544]  xl:px-6 xl:py-3 xl:text:xl lg:text-[16px]";
+    "px-8 py-4 bg-[#7575757a] text-white rounded-[7px] text-2xl font-semibold flex flex-row items-center gap-1 hover:bg-[#75757544]  xl:px-6 xl:py-3 xl:text:xl lg:text-[13px] lg:[&_img]:w-[20px] lg:[&_img]:h-[20px] lg:py-1 sm:[&_img]:w-[15px] sm:[&_img]:h-[15px] sm:py-0";
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -63,16 +63,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
   }
 
   return (
-    <div className=" h-[100vh] w-full xl:h-[80vh] xsm:absolute flex justify-center">
-      <div className="xsm-bg relative -top-[11%] hidden md:flex w-[85%] h-screen z-20 xxxxsm:h-[60vh]">
-        <Image
-          className="rounded-sm border-solid border-2 border-[#323232] absolute w-[100%] h-[auto] z-10"
-          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-          alt={`${movie.original_title}-poster`}
-          width={430}
-          height={600}
-        />
-      </div>
+    <div className=" h-[100%] w-full xl:h-[80%] xsm:absolute flex ">
       <div
         style={{
           position: "absolute",
@@ -80,7 +71,7 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
           height: "0",
           paddingBottom: "56.25%",
         }}
-        className="md:hidden"
+        className=""
       >
         <iframe
           style={{
@@ -103,18 +94,18 @@ const HeroMovies = ({ movie }: HeroMoviesProps) => {
         ></iframe>
         <button
           onClick={toggleMute}
-          className="absolute bottom-[280px] right-[120px] bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-40 1xl:bottom-[%] 1xl:right-[100px] lg:bottom-[150px]"
+          className="absolute bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity z-40 bottom-[30%] right-[10%]"
         >
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
       </div>
-      <div className="hero-movie-details-container flex flex-col absolute top-80 z-20 gap-10  left-10 w-[40%] h-[45vh]  lg:w-[50%] md:w-[100%] md:left-0 md:items-center md:bg-gradient-to-t md:from-black md:via-[#000000d7] md:to-transparent md:top-[20%] sm:top-[20%] xsm:top-[45%] xxsm:top-[21%]  xxxxsm:top-[20%] ">
-        <div className="hero-movie-title flex flex-col xsm:p-3 xsm:justify-center w-[100%] ">
-          <h1 className="font-extrabold text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl xsm:text-4xl md:text-center xxxxsm:text-3xl">
+      <div className="hero-movie-details-container w-full flex flex-col z-20 gap-10 mt-[18%] mb-[1%] px-10 md:gap-5 xsm:gap-1 xsm:mt-[16%]">
+        <div className="hero-movie-title flex flex-col xsm:p-3 r w-[50%] lg:w-[80%] xsm:w-[100%] ">
+          <h1 className="font-extrabold w-[50%] text-8xl 2xl:text-7xl xl:text-6xl lg:text-5xl md:text-[36px] sm:text-[30px] xsm:text-[27px] xxsm:text-[23px] xxxsm:text-[19px]">
             {movie.original_title}
           </h1>
-          <p className="xl:text-[14px] lg:truncate flex flex-row xsm:justify-center xsm:w-[100%]">
-            <span className="md:hidden block">{movie.overview}</span>
+          <p className="xl:text-[14px]  flex flex-row xsm:w-[100%]">
+            <span className=" block text-wrap lg:hidden">{movie.overview}</span>
             <span className="md:block hidden">
               {movie.genre_ids.map((genre: any) => genre.id)}
             </span>

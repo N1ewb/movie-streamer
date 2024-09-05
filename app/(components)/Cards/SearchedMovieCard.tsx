@@ -27,6 +27,7 @@ const SearchedMovieCard: React.FC<SearchedMovieProps> = ({ movie }) => {
       console.error("Movie ID is not defined.");
     }
   };
+
   return (
     <div className="Searched-movie-card-container relative w-[200px] h-[500px] text-center z-0">
       <Image

@@ -105,7 +105,7 @@ const Header = () => {
             {navLink.tag}
           </Link>
         ))}
-        <div className="relative flex flex-row-reverse items-center w-[40%]">
+        <div className=" flex flex-row-reverse items-center w-[40%]">
           <Image
             onClick={() => handleSearchClick()}
             src="/search-white.png"
@@ -121,7 +121,7 @@ const Header = () => {
             name="search"
             type="text"
             placeholder="Search "
-            className={`absolute right-0 transition-all
+            className={`absolute right-32 top-8 transition-all
       duration-500 ease-in-out text-black sm:opacity-100 sm:w-[150px] sm:pl-3 ${
         searchClicked ? "w-[200px] opacity-100 pl-3" : "w-0 opacity-0 pl-0"
       }`}
@@ -133,8 +133,8 @@ const Header = () => {
       </div>
 
       <div
-        className={` flex flex-col absolute opacity-0  left-0 top-20 bg-black  gap-5 justify-between items-center py-10 w-full text-white z-50 transition-all ease-in-out duration-500 ${
-          showDropdown ? "md:opacity-100" : ""
+        className={` flex flex-col absolute opacity-0 left-0  bg-black  gap-5 justify-between items-center py-10 w-full text-white z-50 transition-all ease-in-out duration-500 ${
+          showDropdown ? " top-16 md:opacity-100" : "-top-40"
         } `}
       >
         {navLinks.map((navLink) => (
@@ -152,8 +152,8 @@ const Header = () => {
           onClick={() => handleShowDropdown()}
           src="/menu.png"
           alt="menu"
-          width={45}
-          height={45}
+          width={30}
+          height={30}
         />
       </div>
     </div>

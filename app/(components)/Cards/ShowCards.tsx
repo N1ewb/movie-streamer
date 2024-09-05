@@ -20,9 +20,9 @@ const ShowCards: React.FC<ShowCardProps> = ({
   const [isHovered, setIsHovered] = useState(false);
 
   const PlayButtonClass =
-    "bg-white py-1 px-4 rounded-[3px] text-black hover:bg-[#ffffffc0] flex flex-row gap-2 items-center md:[&_img]:w-[15px] md:[&_img]:h-[15px]";
+    "bg-white py-1 pr-4 pl-2 rounded-[3px] text-black hover:bg-[#ffffffc0] flex flex-row gap-1 items-center md:[&_img]:w-[15px] md:[&_img]:h-[15px] md:text-[13px] sm:[&_img]:w-[11px] sm:[&_img]:h-[11px] sm:pr-2";
   const MoreInfoClass =
-    "bg-[#7575757a] py-1 px-4 rounded-[3px] text-white hover:bg-[#75757544] flex flex-row gap-2 items-center md:[&_img]:w-[15px] md:[&_img]:h-[15px]";
+    "bg-[#7575757a] py-1 pr-4 pl-2 rounded-[3px] text-white hover:bg-[#75757544] flex flex-row gap-1 items-center md:[&_img]:w-[15px] md:[&_img]:h-[15px] md:text-[13px] sm:[&_img]:w-[11px] sm:[&_img]:h-[11px] sm:pr-2";
 
   const handleMoreInfoClick = () => {
     setSelectedShow(show);
@@ -31,7 +31,7 @@ const ShowCards: React.FC<ShowCardProps> = ({
 
   return (
     <div
-      className={`card-container text-white flex flex-col z-0 w-[300px] h-[auto]`}
+      className={`card-container text-white flex flex-col justify-center z-0 w-[300px] lg:w-[250px] md:w-[200px] sm:w-[175px] xsm:w-[150px]`}
     >
       <Image
         onMouseEnter={() => setIsHovered(true)}
@@ -39,7 +39,7 @@ const ShowCards: React.FC<ShowCardProps> = ({
         src={
           show.backdrop_path
             ? `https://image.tmdb.org/t/p/original${show.backdrop_path}`
-            : "/movie-cover/alya.jpg"
+            : "/alya.png"
         }
         alt={`${
           show.original_title ? show.original_title : show.original_name
@@ -55,14 +55,14 @@ const ShowCards: React.FC<ShowCardProps> = ({
       />
       {isHovered ? (
         <div
-          className="absolute top-0 flex flex-col p-4 justify-between h-[100%] w-[100%]"
+          className="absolute top-0 flex flex-col p-4 justify-between h-[100%] w-[100%] md:p-2"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <h1 className="font-semibold text-xl">
+          <h1 className="font-semibold text-xl md:text-[15px] sm:text-[13px] xsm:text-[12px] leading-tight">
             {show.title ? show.title : show.name}
           </h1>
-          <div className="buttons-container w-[100%] flex flex-row justify-around font-semibold">
+          <div className="buttons-container w-[100%] flex flex-row items-center justify-around font-semibold">
             <PlayMovieButton
               PlayButtonClass={PlayButtonClass}
               show={show}

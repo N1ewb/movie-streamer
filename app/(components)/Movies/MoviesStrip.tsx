@@ -26,11 +26,13 @@ const MovieList = ({
   }, []);
 
   return (
-    <div className="movies-list-container p-[45px] max-w-full text-white z-20  flex flex-col">
+    <div className="movies-list-container px-[45px] max-w-full text-white z-20  flex flex-col lg:px-[35px] md:px-[25px]">
       <div className="movies-list-header">
-        <h1 className="font-semibold text-3xl">{section.header}</h1>
+        <h1 className="font-semibold text-3xl lg:text-[25px] md:text-xl text-[#d4d4d4] sm:text-[16px] xsm:text-sm">
+          {section.header}
+        </h1>
       </div>
-      <div className="popular-movies-content-container flex flex-row items-center justify-between p-[30px] w-full">
+      <div className="popular-movies-content-container flex flex-row items-center justify-between w-full">
         <button
           className="cursor-pointer"
           onClick={() => handleSlideContainer("left")}

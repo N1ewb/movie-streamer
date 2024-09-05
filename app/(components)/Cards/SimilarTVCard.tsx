@@ -49,7 +49,7 @@ const SimilarTVCard: React.FC<SimilarTVCardProps> = ({ tv }) => {
           )}
         </div>
       ) : (
-        <div className="w-full h-[300px] flex items-center justify-center bg-gray-700 rounded-lg">
+        <div className="w-full h-[auto] flex items-center justify-center bg-gray-700 rounded-lg ">
           <p className="text-sm text-gray-400">No Image Available</p>
         </div>
       )}

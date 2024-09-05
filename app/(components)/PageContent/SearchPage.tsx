@@ -12,6 +12,7 @@ const SearchPage = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchedMovie, setSearchedMovies] = useState<Movie[]>([]);
+  const [searchValue, setSearchValue] = useState<string>();
 
   const handleGetMoviesByPopular = async (page: number, query: string) => {
     try {
@@ -36,11 +37,26 @@ const SearchPage = () => {
     }
   }, [searchQuery]);
 
+  useEffect(() => {
+    if (searchValue) {
+      handleGetMoviesByPopular(1, searchValue);
+    }
+  }, [searchValue]);
+
   return (
     <div className="search-page-container bg-black text-white min-h-screen w-full flex flex-col items-center p-10">
-      <div className="search-input-container h-[80px]"></div>
+      <div className="search-input-container h-[80px] mt-[100px]">
+        <input
+          name="search"
+          type="text"
+          placeholder="Search"
+          className={`z-50 text-black hidden md:block`}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+      </div>
       <div className="searched-movie-container flex flex-row flex-wrap justify-center items-center gap-6 p-10">
-        {searchQuery ? (
+        {searchQuery || searchValue ? (
           !isLoading ? (
             searchedMovie &&
             searchedMovie.map((movie: Movie) => (
