@@ -96,6 +96,7 @@ const Header = () => {
       <div className="nav-links flex flex-row justify-around w-[70%] align-middle items-center md:hidden md:w-0 ">
         {navLinks.map((navLink) => (
           <Link
+            key={navLink.tag}
             className={`m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out ${
               navLink.tag === "Search Movies" ? "hidden" : ""
             }`}
@@ -138,6 +139,7 @@ const Header = () => {
       >
         {navLinks.map((navLink) => (
           <Link
+            key={navLink.tag}
             className="m-0 font-semibold hover:-translate-x-1 transition-all duration-300 ease-in-out z-50"
             href={navLink.link}
           >

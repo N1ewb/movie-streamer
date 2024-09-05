@@ -128,7 +128,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
       }
     };
     handleGetMovieVideo(movie.id, type);
-  }, [movie.id]);
+  }, [movie.id, type]);
 
   useEffect(() => {
     if (show && movie && type === "tv") {
@@ -148,7 +148,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
 
       fetchData();
     }
-  }, [show]);
+  }, [show, type]);
 
   useEffect(() => {
     if (show && modalRef.current && !isLoading) {
@@ -160,7 +160,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
     if (isExtended && buttonRef.current && !isLoading) {
       buttonRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [isExtended]);
+  }, [isExtended, isLoading]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -177,7 +177,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
     if (contentHeight) {
       console.log("content height", contentHeight);
     }
-  }, [contentHeight, window]);
+  }, [contentHeight]);
 
   if (!show) return null;
 
