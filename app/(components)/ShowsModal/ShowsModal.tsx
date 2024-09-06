@@ -154,7 +154,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
     if (show && modalRef.current && !isLoading) {
       modalRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [show, isLoading]);
+  }, [show, isLoading, modalRef.current]);
 
   useEffect(() => {
     if (isExtended && buttonRef.current && !isLoading) {
@@ -180,7 +180,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
   }, [contentHeight]);
 
   useEffect(() => {
-    if (show) {
+    if (show && !isLoading && modalRef.current) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -189,7 +189,7 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [show]);
+  }, [show, isLoading, modalRef.current]);
 
   if (!show) return null;
 
@@ -198,10 +198,8 @@ const ShowsModal = ({ show, onClose, movie, type }: ShowsModalProps) => {
   }
 
   return (
-    <div
-      className="absolute max-h-screen w-full left-0 bg-[#000000cc] bg-opacity-75 flex  justify-center pt-[50px] z-[99] rounded-[20px] overflow-auto"
-      ref={modalRef}
-    >
+    <div className=" max-h-screen absolute  w-full left-0 bg-[#000000cc] bg-opacity-75 flex  justify-center pt-[50px] z-[99] rounded-[20px] overflow-auto">
+      <div className="dummy abosotute top-0" ref={modalRef}></div>
       <div className="modal-content-container  h-fit bg-[#141414] relative  w-[50%] 2xl:w-[70%] 1xl:w-[75%] lg:w-[80%] md:w-[90%]  min-h-screen shadow-lg  xsm:w-full rounded-md">
         <div className="modal-header w-[100%] flex flex-row-reverse absolute top-2 right-3 z-30">
           <button

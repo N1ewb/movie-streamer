@@ -32,13 +32,13 @@ const MovieList = ({
           {section.header}
         </h1>
       </div>
-      <div className="movies-content-container py-2 flex flex-row items-center justify-between w-full">
+      <div className="movies-content-container relative py-2 flex flex-row items-center justify-between w-full">
         <button
-          className="cursor-pointer"
+          className="cursor-pointer absolute h-[100%] left-0 top-0 z-50 px-1 bg-[#00000098]"
           onClick={() => handleSlideContainer("left")}
         >
           <Image
-            className="hover:-translate-x-1 transition-transform duration-300"
+            className="  hover:-translate-x-1 transition-transform duration-300"
             src="/left-arrow.png"
             alt="left"
             width={15}
@@ -47,7 +47,7 @@ const MovieList = ({
           />
         </button>
         <div
-          className="movie-list-container flex flex-row w-[95%] gap-3 overflow-auto scrollbar-hide"
+          className="movie-list-container flex flex-row w-full gap-3 overflow-auto scrollbar-hide"
           ref={movieListRef}
         >
           {movieList.map((movie: Movie) => (
@@ -62,11 +62,11 @@ const MovieList = ({
           ))}
         </div>
         <button
-          className="cursor-pointer"
+          className="cursor-pointer absolute h-[100%] right-0 top-0 px-1 bg-[#00000098]"
           onClick={() => handleSlideContainer("right")}
         >
           <Image
-            className="hover:translate-x-1 transition-transform duration-300"
+            className=" hover:translate-x-1 transition-transform duration-300"
             src="/right-arrow.png"
             alt="right"
             width={15}

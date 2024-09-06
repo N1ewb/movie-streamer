@@ -32,9 +32,9 @@ const TvShowList = ({
           {section.header}
         </h1>
       </div>
-      <div className="tv-content-container py-2 flex flex-row items-center justify-between w-full">
+      <div className="tv-content-container relative py-2 flex flex-row items-center justify-between w-full">
         <button
-          className="cursor-pointer"
+          className="cursor-pointer absolute h-[100%] left-0 top-0 px-1 z-50 bg-[#00000098]"
           onClick={() => handleSlideContainer("left")}
         >
           <Image
@@ -47,7 +47,7 @@ const TvShowList = ({
           />
         </button>
         <div
-          className="tv-list-container flex flex-row w-[95%] gap-3 overflow-auto scrollbar-hide"
+          className="tv-list-container flex flex-row w-full gap-3 overflow-auto scrollbar-hide"
           ref={tvListRef}
         >
           {tvList.map((tv: Movie) => (
@@ -62,7 +62,7 @@ const TvShowList = ({
           ))}
         </div>
         <button
-          className="cursor-pointer"
+          className="cursor-pointer absolute h-[100%] right-0 top-0 px-1 bg-[#00000098] "
           onClick={() => handleSlideContainer("right")}
         >
           <Image

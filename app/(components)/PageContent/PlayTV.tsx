@@ -156,7 +156,7 @@ const PlayTV = () => {
           allow="autoplay; encrypted-media; "
         ></iframe>
       </div>
-      <div className="prev-next-episode-button flex flex-row w-[80%] justify-between py-4">
+      <div className="prev-next-episode-button flex flex-row w-[80%] justify-between py-4 xsm:[&_button]:px-8 xxsm:[&_button]:px-6 xxxsm:[&_button]:px-4">
         {ep && parseInt(ep) !== 1 ? (
           <button
             onClick={() => handlePrevEpisode()}
@@ -178,13 +178,13 @@ const PlayTV = () => {
           <p></p>
         )}
       </div>
-      <div className="tv-episode-list-container w-[80%] flex flex-row flex-wrap gap-2 p-7">
+      <div className="tv-episode-list-container w-[80%] flex flex-row flex-wrap justify-center gap-2 p-7 lg:p-1 lg:text-[14px]">
         {tv && episodeList.length !== 0
           ? episodeList.map((episode: TVEpisode) => (
               <div
                 key={episode.id}
                 onClick={() => handleJumpToEpisode(episode.episode_number)}
-                className={`episode-list-container cursor-pointer w-[9%] p-4  rounded-[3px] group  ${
+                className={`episode-list-container cursor-pointer w-[100px] p-4  rounded-[3px] group  ${
                   ep && parseInt(ep) === episode.episode_number
                     ? "bg-[#e4e4e4] text-black"
                     : "bg-[#323232] text-white"
